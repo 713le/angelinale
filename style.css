@@ -220,14 +220,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: invert(1);
     
 }
 
 .nav-icon:hover img {
     /* filter: invert(1) hue-rotate(240deg) saturate(150%); */
-    filter: invert(100%) sepia(100%) saturate(1000%) hue-rotate(180deg);
-    /* transition: filter 0.2s ease; */
+ transform: scale(1.1);    /* transition: filter 0.2s ease; */
 }
 
 .theme-toggle {
@@ -445,6 +443,7 @@ body.dark-mode .menu-overlay {
     margin-right: 0.5rem;
     display: flex;
     align-items: center;
+    filter: invert(1);
 }
 
 .btn-with-icon {
@@ -456,7 +455,7 @@ body.dark-mode .menu-overlay {
 }
 
 .btn-with-icon:hover .email-icon {
-    filter: invert(1);
+    filter: invert(0);
 }
 
 .hero-cta {
