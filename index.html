@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angelina Le</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">Angelina Le</div>
+        <div class="loading-bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo"><img src="photos/al-logo.svg" alt="Angelina Le"></a>
+            <div class="nav-center">
+                <button class="menu-trigger" id="menuTrigger">[ menu ]</button>
+            </div>
+            <div class="nav-icons">
+                <a href="mailto:angelinale13@gmail.com" class="nav-icon" title="Email" aria-label="Email">
+                    <img src="photos/mail.svg" alt="Email">
+                </a>
+                <a href="#" class="nav-icon" title="LinkedIn" aria-label="LinkedIn">
+                    <img src="photos/linkedin.svg" alt="LinkedIn">
+                </a>
+                <!-- <div class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon">◯</span>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <button class="menu-close" id="menuClose">[ close ]</button>
+            <nav class="menu-nav">
+                <a href="#work" class="menu-item">/ projects</a>
+                <a href="#about" class="menu-item">/ about</a>
+                <a href="#resume" class="menu-item">/ experience</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" data-clickable="true">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Angelina Le">Angelina Le</h1>
+            <p class="hero-subtitle">is a UX designer & creative developer from Harrisburg, PA.</p>
+            <p class="hero-subtitle">design-minded. code-fluent.</p>
+            <p class="hero-tagline">✮ ⋆ ˚｡𖦹 ⋆｡°✩</p>
+            <div class="hero-cta">
+                <a href="mailto:angelinale13@gmail.com" class="btn btn-secondary btn-with-icon">
+                    <img src="photos/mail.svg" alt="Email" class="email-icon">say hi!
+                </a>
+            </div>
+        </div>
+        <div class="hero-ascii-art">
+            <pre>##%####%%*##+#%%%%#..=*#%%%@@@@*+*##@@@%##@@@#=+-:-%@%.....=%%%=:%%%%%#%@#*=+++#@%@@@@@@@@@@@@@@@@@@@@@@@@@@@*%@@@@@@@@@@@*++++++*
+*%@@%****#%%%*%%%%%#+++#%%%%@@*+:@@@@#+-:-@@@#:::.:+%%%+....#%%*%-=@@##%@*+++#**%%###@@@@@@@@@@@@@@@@@@@@@@@@*%@@@@@@@@@@@@@*+++*%
+=#@@%*+=++***+=+*=+++**#%%%**::::%@@%:.:-=%%%%*###:...-#-...=%%%%+@%#%@@%#%##*#@#***@@@@@@@@@@@@@@@@@@@@@@@@@*%@@@@@@@@@@@@@@@@*%@
++**+*+===#**#****##*++**#***----=%@@@+--*#++:::*+#+:..:*#..:-..@@#%@@@%%#*#*+%*+++%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%#*++*##%#*++*#%@@#*####==**+::--***+-::=##+:---*+=*##*=#%%%%*+@@#%@@@%#*###%##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%*+***%%%#****:-+***#++#***#*-=-=##*+---:--::**+:-:+####%+%%=*#@@%%@@@###*#*++*@@@@@@@@@@@@@@@@@@@@@@@@@@@#%@%@@@@@@@@@@@@@@@@@@@@
+*#*+**%%%%*+=++++**+:.-+-:-+-:=+++:+++##*-..:+##=+#######%%%##+--#@%%%%*#*++*@@@@@@@@@@@@@@@@@@@@@@@@%@%%***%#@@@@@@@@@@@@@@@@@@@@
+*==**#+**+++*%#+:=*#-:-.:==::.=**++==+*+**:=####==#####%#+%+:-+*=#%%%%#@%#%@@@@@@@@@@@@@@@@@@@@@@@@@@#%@@*##@#@@@@@@@@@@@@@@@@@@@@
+.+*+++#%#++****+=*#%+++=*#*::===+*+--*#*:-+=#*#-=**##*==::=+=-*=*%%%%%@%%@@@@@@@@@@@@@@@@@@@@@@@@@@%%@@@@#%#@%@@@@@@@@@@@@@@@@@@##
+-=**+**+*+*+**=-=*##+++=+#+--:-++*#=.-*###**+##*---=++++=:..-=*%%%%=*%%*.=@@@@@@@@@@@@@@@@@@@@@@%%%%%@@%%%#*@@@%@@@@@@@@@@##*@@%##
++++++*++**#**#***###++***+=-+===+***=:*###+=--==+*#*==--:::-::=+%*++#%@*-*#@@@@@@@@@@@@@@@@@@%%%@%%%%%%%%%##@@@#@@@@@@@#++##*@@%##
+***#**+-+=****+++***++***+:-=*..=*###*******+*%*------:-*#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*+%#*%#%%#%%%%%##@@@#@@@@@***%%##*%@###
+#+=*%#=**+:=#****##**#=.:.=+=+:+***++=-==-----:::::::+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+==*%#+%%%%#%%%%%#%@@%#@@@@%@@%%****@@%##
++*+**+*++=::+=++**%#+==***::++##*++++++++==+-:::--+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*=-=***%%#%%%%%%@@%##@@@%#@@@@%###**##*@@@@@
+%#*+##**=+-*#*+*#####+:=+=::-+#***+++++++====-==+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*====+*##@%+@%%%@@@@%##%@@@#@@@@######*+*#@@@@
+########*=+*##%%##+*#=:###**#%#*##**++=======+*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+===+#**@#*%@@%@@@@%*#@@@@#@@@@%#*****+**#%@@
+########**##+*########*#####%%#+++++=====+***#@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@#*++###%**%@@@@*++*#%@@@@%@@@@####*#*++*#%%@
+###########**####*#*##****#%%%-:::---=+**+*+#@@@@@@@@@@@@@@@@%####@@@@@@@@@@@@@@@@@@@@@%++##*%####*+**####%*=%#%@@@@#******+=+*#%@
+:*=*##+=+=:.=#%=.=+-+=*++-#%%**+*+*+++*+#%*%@@@@@@@@@@@@@@@@#**###%%%%@@@@@@@@@@@@@@@@@@%*##*%*++###%#-=-=*=#@@@@@@@##*##**+++*#@@
++=:+#%%+--.:=*-+#+--*==-**####*-=+*#%#%++*%@@@@@@@@@@@@@@@@%******#%#%@@@@@@@@@@@@@@@@@@@@#****###*+-:===***=+##+*%##**###*+=+%@@@
+...:%%#+.:==*+:#*::-=:-**#*=-+%**####-+==#@@@@@@@@@@@@@@@@%**++++*###%%@@@@@@@@@@@@@@@@@@@@%#=##*-=**+==+#*=--+=::+***+*#**++=#@@%
+*#*::*+-:-::-:.:--=+::-=+#=-%=++:*%%*+=%*@@@@@@@@@@@@@@@@@**+++++**####%@@@@@@@@@@@@@@@@@@@..+#**+++++-:-=--:-=--=+++++####++=%@@#
+@%+:-=###:.-*#-*+=+-::::----+##=:=-#%#*%@@@@@@@@@@@@@@@@@%*++=++++***###@@@@@@@@@@@@@@@@@@@@=====+++==-:::--::-----====****+++%@@%
+*+***::=*=.:=*+%+-=*:.::=:--:+*+:*###+#@@@@@@@@@@@@@@@@@@#++=====++***###@@@@@@@@@@@@@@@@@@@%-===:::::.-=--=--==-==-=****#*+==%@@%
+--+*++-:.:::=%**#=-+=:::=+:--##*-*##*+#@@@@@@@@@@@@@@@@@#*+++====+++*#%%@@@@@@@@@@@@@@@@@@@@@=::::::::.:--+---==-=++*++*#**+==%@@%
+%++:......:.=%#:.:-::::.:::::-**+*%%@@@@@@@@@@@@@@@@@@@@@@@@#*+++++**%@@@@@@@@@@@@@@@@@@@@@@@*-=.:==---==-%%=-=++++*++**#**+++%@@%
+#+*=:..:=#%*:::.:.-::....:=::=+=:-#%%@@@@@@@@@@@@@@@@@@#**####*++++**###%##%%@@@@@@@@@@@@@@@@@*...-=*:...-++*#*#*+==+**#*=++++%@@#
+=-::-::::*+::::::+=::..:+==++-*##+*%@@@@@@@@@@@@@@@@%@#*+==+***+++++****#%@@@@@@@@@@@@@@@@@@@@%....-.....=#*+++##+==+**##*++++%@@#
+*+=-=-:..--:-=::===+==++=**=%%##**@@@@@@@@@@@@@@@@@@@@@@@@%#+++====+*+#@#@@@@@@@@@@@@@@@@@@@@@@@::=+=:-+**%+***##*+*+**##+++**%@@#
+#*+++***+=###%%*##+**+=#*%%%-=@@#@@@@@@@@@@@@@@@@%@@@@%@@%+*+++==-==+=+******+**###%@@@@@@@@@@@@@%####****@****%%%*++*###****+%@@#
+-*=-=-.:.-*++*=**%#..=**-*:::*@@@@@@@@@@@@@@@@@*+++++++++*+======-================++*%@@@@@@@@@@@@%#%#####@**++++++***+##+++++%@@%
+=+#+-:+==++*++=++**+=++***:::*@@@@@@@@@@@@@@@@%*+=====--======+=========--------====+#@@@@@@@@@@@%###*++**@**++++*++***##++++=#@@#
+@@@@*:-=++:-++++++==+%%@@#=::#@%@@@@@@@@@@@@@@#*+======-=====+++====++====-------===+*%@@@@@@@@@@####=--+++++++%%#+++***#**+==#%%#
+@@@@@+===::::+=-==-+*#@@#::--%*=%@#@@@@@@@@@@@#*++=-=======+*++===-==+++++==----=====+#@@@@@@@@@@%##*=#*#@@@@@@@@%*****#***+==#%%#
+@@%%%=:::--=+**====#++=-%#+*%@@+=@+@@@@@@@@@@@%**+========**++**+++***++***+========++%@@@@@@@@@@@##+:=-%%@@@@@@@@*+*###***+==#%%#
+%#%%%:::.:::=**+*=.-::.:-::=*=-=-%-*@@@@@@@@#@%#*++=====++*##@@@@%%%#%%%+=+*+========+#@@@@@@@@@@@%#**=@@@@@@@@@@%***####***+=#%%*
+:+@@%+#*:.::--........::::::::::.:.-@@@@@@@@#%%#**+++++++++++++++*++======+**++=++++=+##@@@@@@@@@@###%@@=-#%#+#%%%#*###%%**++=+#%*
++*%#*@#----:.::-===:::::.::-:-----=*@@@@@@@@@###***++**+++=====+++========+*#**+++++=+%@@@@@@@@@@@##**%%=--=*+%%@%#*#**##++===*%%#
++***@%===+++--+**:::@@#:.-#*#*%%+-*@@@@@@@@@@@%%**********+***##****######%%%%#*+++++#@@@@@@@@@@@@%#*+==++%###%@@@#****#**+==-*#%#
+**+@@++==*+==-...::==-:.:#@@%%#+#*%@@@@@@@@@@@@@#***+++*%@@@@%##***==++=+#@#+***+++++@@@@@@@@@@@@@%#*++@@@@@@@@@@@%*##*##+++==*#%*
+##@@#*+**%%***-.::::.::::@@@@#=#@#@@@@@@@@@@@@@@@#***+=+++%@=-:-:::::=-=+*+===+++++*@@@@@@@@@@@@@@@#***%@@@@@@@@@@%%##*##**+=---::
+%%@%#**===*%%%#-:::::++:.+@@@==%@@@@@@@@@@@@@@@@@@#**++===++++*+++*+++++++====++***@@@@@@@@@@@@@@@%#*%##@@@@@@@@@@#-.......:::::::
+@@@**+++===#@@%*=---#@@*-*#@@==#%%@@@@@@@@@@@@@@@@@%**++++++**++++++++*++=====+**#@@@@@@@@@@@@@@@@@##@@@@@@@@@@@@@-....:::::::::::
+@@#++===---#@#%#*++@@@@+:+@@@+=+*@@@@@@@@@@@@@@@@@@@@#*+==++++++****++=====-=+**@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@#=::::::::::::::
+@@@#*+++===*%*%%*##*-=*+*#@@@=:-#@@@@@@@@@@@@@@@@@@@@@%#*+=+========------==+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##*-::::::::::::
+%@*+**+==----#%%#*=-::==#@=%@..=%@@@@@@@@@@@@@@@@@@@@@@%%#**+=============+#%@@@@@@@@@@@@@@@@@@@@@@@@%%@@@@@@@@@@@%@%#*:::::::::::
+###**+==-=+=:-:%@+:::.:-#-.*#.:=#@@@@@@@@@@@@@@@@@@@@@@@%%%%##*++*******#%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%##*@*-:::::::
+@@@@@@@@@@@-:::*#+-:::::==-#*-=+%@@@@@@@@@@@@@@@@@@@@@@@%####%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#%%#%@@@%=::::
+@@@@@@@@@@#:-.=*@%=.::.:=*--:=#@@@@@@@@@@@@@@@@@@@@@@@%@@#******###########%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%****#@@@@@@@%-
+@@@@@@@@@@+-::*-*+::-:::-*##%@@@@@@@@@@@@@@@@@@@@@@@@@%@@#*+++*+********###%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#**+*#####%@@@
+@@@@@@@@@@=***##***-.=%*-.:#@@@@@@@@@@@@@@@@@@@@@@@@@@%%@#*++++++++++***##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#*+**=-:--=+*%
+@@@@@@@@@*%#########=..-%#=-@@@@@@@@@@@@@@@@@@@@@@@@@%%%@@*++++++++++****##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*-::--##%@#====+==
+@@@@@%#%@*#########%#...=%*=@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%*++++++++++****#%@@@@@@@@@@@@@@@@@@@@@@@@@@@%##@@@@@#+--=:-=#@+*@%==-===
++%@@@*##%########%#%#...:*#@@@@@@@@@@@@@@@@@@@@@@@@@#%@@%*++++++++*+**+**#%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@==-=--=%@%=@@#====+
+=#@@@%#%%##*####%%#%#:..:+#@@@@@@@@@@@@@@@@@@@@@@@@@%%***+++++++++++++++**#%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%#----=--=%@@#%@@===+=
+==+@@%#########%%%%%#...:+%@@@@@@@@@@@@@@@@@@@@@@@@%*++===============+++*#%##%@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%+-:-:--==#@@@#@@@+=++
+#%#%%#########%%%%%%-.:.:-=+%@@@@@@@@@@@@@@@@@@@@@@%*+=----============++*###%@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%*==-=--=-+#@@@@@@@*==+
++==*######%%%%%%%%%..:--::=+#@@@@@@@@@@@@@@@@@@@@@@@*+=---------------==+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#====++=-=+#@@@@@@@%=+=
+++###%##%%%%%%%%%%#...::::=*#%@@@@@@@@@@@@@@@@@@@@@@*==----------::::-==*#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+==-*%*=+=+*@@@@@@@@*==
+*##%#%##%%%%%%%%%@=.---:-::=%%@@@@@@@@@@@@@@@@@@@@@@@+=----------------+*@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#++*@@@@@@%##@@@@@@@@*=+
+###%###%#%%%%%%%%%-.:-=++*+#%@@@@@@@@@@@@@@@@@@@@@@@@@+=-::-------::::=*%%%@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%#@@%#%%@@@@@@@@@@@@%*+
+%########%%%%%@%%%%:-:----=*#@@@@@@@@@@@@@@@@@@@@@@@@@@%-::::::-::::-+%%%@@%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%@%#@@@@@@@@@@@@@@@@@@
+@@@@%%%%##%%%%%@%%-::::::-=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+:::::::::=%%#+%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%@@@@@@@@@@@@@@@@@@@@
+@#*+++++*##%%%%%@@-:::::::*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*::::::-+%%%=-%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%@@@@@@@@@@@@@@@@@@@
+*++=========++*%%*::::--:=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=::::-#%%%%@%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%@@@@@@@@@@@@@@@@@@
+++======---=====+-::::---=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*:::-#%%%@%#%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%#%@@@@@@@@@@@@@@@@@
++=====-----------:::::---+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@+-%%%@@%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%#%@@@@@@@@@@@@@@@@
+====-------------:::::---%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%@@%@%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%@@@@@@@@@@@@@@@@@
+===-------------:::::---+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@
+==--------------:::::---%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%+-:+%%%%%%%%%%%%@%@%@%@%%%@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@
+==--------------:::::-=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@%%%%%%=-%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@#%@@@@@@@@@@@@@@@@@@@</pre>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work-section">
+        <h2 class="section-title glitch" data-text="work">/ projects</h2>
+        
+        <!-- Featured Projects (Web Development & UX Design) -->
+        <div class="featured-projects">
+            <a href="projects/toolkit.html" style="text-decoration: none; color:#1a1a1a;">
+                <div class="featured-card" data-category="web-development ux-design">
+                    <div class="featured-image" style="background-image: url('photos/toolkit.png');"></div>
+                    <div class="featured-info">
+                        <h3>TOOLKIT FOR DISABILITY WELLBEING</h3>
+                        <p>Senior Capstone - An accessibility-first comprehensive web hub with disability resources and community stories in Bethlehem, PA.</p>
+                        <p>Jan 2026 - present</p>
+                        <div class="work-tech">
+                            <span>REACT</span>
+                            <span>NODE.JS</span>
+                            <span>SANITY</span>
+                        </div>
+                        <a href="projects/toolkit.html" class="work-link">EXPLORE →</a>
+                    </div>
+                </div>
+            </a>
+
+            
+
+            <a href="projects/vynl.html" style="text-decoration: none; color:#1a1a1a;">
+                <div class="featured-card" data-category="web-development">
+                    <div class="featured-image" style="background-image: url('photos/vynl.png');"></div>
+                    <div class="featured-info">
+                        <h3>VYNL</h3>
+                        <p>MUSIC RATING PLATFORM USING BINARY SEARCH ALGORITHM TO RANK ALBUMS.</p>
+                        <div class="work-tech">
+                            <span>REACT</span>
+                            <span>POSTGRESQL</span>
+                            <span>REST API</span>
+                        </div>
+                        <a href="projects/vynl.html" class="work-link">EXPLORE →</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- <div class="featured-card" data-category="web-development">
+                <div class="featured-image" style="background-image: url('photos/the-buzz.png');"></div>
+                <div class="featured-info">
+                    <h3>THE BUZZ</h3>
+                    <p>SOCIAL MEDIA APP WITH SECURE BACKEND AND GOOGLE OAUTH INTEGRATION.</p>
+                    <div class="work-tech">
+                        <span>FLUTTER</span>
+                        <span>SUPABASE</span>
+                        <span>REST API</span>
+                    </div>
+                    <a href="projects/the-buzz.html" class="work-link">EXPLORE →</a>
+                </div>
+            </div>
+
+            <div class="featured-card" data-category="web-development other">
+                <div class="featured-image" style="background-image: url('photos/melodia.png');"></div>
+                <div class="featured-info">
+                    <h3>MELODIA</h3>
+                    <p>MUSIC RECOMMENDATION ENGINE USING SPOTIFY API WITH INTERACTIVE VISUALIZATIONS.</p>
+                    <div class="work-tech">
+                        <span>REACT</span>
+                        <span>SPOTIFY API</span>
+                        <span>D3.JS</span>
+                    </div>
+                    <a href="projects/melodia.html" class="work-link">EXPLORE →</a>
+                </div>
+            </div>
+
+            <div class="featured-card" data-category="web-development ux-design graphic-design">
+                <div class="featured-image" style="background-image: url('photos/myvote.png');"></div>
+                <div class="featured-info">
+                    <h3>MYVOTE</h3>
+                    <p>VOTER RESOURCE HUB WITH ACCESSIBLE INFORMATION ON CANDIDATES AND REGISTRATION.</p>
+                    <div class="work-tech">
+                        <span>HTML/CSS</span>
+                        <span>JAVASCRIPT</span>
+                        <span>FIGMA</span>
+                    </div>
+                    <a href="projects/myvote.html" class="work-link">EXPLORE →</a>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Gallery Projects (Graphic Design & Other) -->
+        <div class="gallery-section">
+            <h3 class="gallery-subtitle">GALLERY</h3>
+            <div class="gallery-grid">
+                <!-- <div class="gallery-card" data-category="graphic-design other">
+                    <div class="gallery-image" style="background-image: url('photos/housing-discrimination.png');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>HOUSING DISCRIMINATION</h4>
+                                <p>DATA RESEARCH INVESTIGATING HOUSING DISCRIMINATION AND POVERTY CYCLES.</p>
+                                <div class="work-tech">
+                                    <span>PYTHON</span>
+                                    <span>SQL</span>
+                                    <span>DATA VIZ</span>
+                                </div>
+                                <a href="projects/housing-discrimination.html" class="work-link">EXPLORE →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <a href="projects/interplay.html" class="gallery-card" data-category="graphic-design">
+                    <div class="gallery-image" style="background-image: url('photos/Chapbook Mockup Inside Pages.jpg');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>INTERPLAY</h4>
+                                <p>GRAPHIC CHAPBOOK DESIGN</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/life-of-pi.html" class="gallery-card" data-category="graphic-design">
+                    <div class="gallery-image" style="background-image: url('photos/lifeofpicovermockup.png');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Life of pi</h4>
+                                <p>COVER AND SPINE REDESIGN</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/parasite.html" class="gallery-card" data-category="graphic-design">
+                    <div class="gallery-image" style="background-image: url('photos/parasite.png');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Parasite</h4>
+                                <p>SYMBOL DESIGNS</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+
+                <a href="projects/nostalgia.html" class="gallery-card" data-category="graphic-design">
+                    <div class="gallery-image" style="background-image: url('photos/final-print.png');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>NOSTALGIA</h4>
+                                <p>p5.js poster</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/boat-scene.html" class="gallery-card" data-category="graphic-design">
+                    <div class="gallery-image" style="background-image: url('photos/boat-scene.gif');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>LAZY LAKE</h4>
+                                <p>p5.js poster</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a href="projects/cats.html" class="gallery-card" data-category="graphic-design">
+                    <div class="gallery-image" style="background-image: url('photos/cats.gif');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>CATS</h4>
+                                <p>p5.js poster</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+
+                <a href="projects/record-player.html" class="gallery-card" data-category="other">
+                    <div class="gallery-image" style="background-image: url('photos/recordplayerred.png');">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>INTERACTIVE RECORD PLAYER</h4>
+                                <p>BLENDER & UNITY</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- <div class="gallery-card placeholder" data-category="other">
+                    <div class="gallery-image" style="background-image: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>BLENDER PROJECT</h4>
+                                <p>COMING SOON</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2 class="section-title glitch" data-text="about">/ about me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am currently a senior at Lehigh University, pursuing a Bachelor of Science in Computer Science with a minor in Graphic Design. Previously, I have interned as a UX Designer and Researcher at DT House and a UX Designer and Web Developer at AINA Technologies. I am a design-minded developer passionate about creating intuitive digital experiences that blend aesthetics with accessibility.</p>
+                <p>Here are some technologies I've worked with:</p>
+                <div class="tech-list">
+                    <ul>
+                        <li>Figma</li>
+                        <li>React</li>
+                        <li>JavaScript/TypeScript</li>
+                        <li>CSS/Responsive Design</li>
+                    </ul>
+                    <ul>
+                        <li>Adobe Creative Suite</li>
+                        <li>Blender</li>
+                        <li>Unity</li>
+                        <li>Node.js</li>
+                    </ul>
+                </div>
+                <p>In my free time, I love exploring new design tools and experimenting with creative coding projects, making my way through all the national parks, and playing way too much Roblox with my friends!</p>
+            </div>
+            <div class="about-image" style="background-image: url('photos/about-me.jpg');"></div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <h2 class="section-title glitch" data-text="resume">/ experience</h2>
+        <div class="resume-content">
+            <!-- <div class="resume-header">
+                <h3>Angelina Le</h3>
+                <p>Harrisburg, PA • 717-701-7773 • angelinale13@gmail.com<br>
+                linkedin.com/in/angelinavle/ • angelinale.carrd.co/</p>
+            </div>
+            
+            <div class="resume-section-group">
+                <h4>EDUCATION</h4>
+                <div class="resume-item">
+                    <div class="resume-header-line">
+                        <strong>Lehigh University</strong>, Bethlehem, PA — Graduation: May 2027
+                    </div>
+                    <p>Bachelor of Science in Computer Science | Minor in Graphic Design<br>
+                    <strong>GPA: 3.6</strong></p>
+                    <p><strong>Relevant Coursework:</strong> 2D Design, Programming & Data Structures, Applied Engineering Computer Methods, Systems Software, Design & Algorithms, Computer Organization & Architecture, Software Engineering, Introduction to Graphic Design</p>
+                    <p><strong>Honors:</strong> Dean's List Fa 2023, Sp 2024, Fa 2025, Sp 2026, Lehigh Trustee Scholarship, Lehigh University Student Scholars Institute</p>
+                    <p><strong>Organizations:</strong> Women in Computer Science, Girls Who Code, Society of Asian Scientists and Engineers, Rewriting the Code</p>
+                </div>
+            </div>
+            
+            <div class="resume-section-group">
+                <h4>SKILLS</h4>
+                <p><strong>Design & Prototyping:</strong> Figma, Adobe XD, Illustrator, InDesign, Photoshop, Blender, Premiere Pro, Procreate, Wireframing</p>
+                <p><strong>Programming & Databases:</strong> React, JavaScript, Java, Python, C, HTML/CSS, R, SQL, REST API, Supabase, Flutter, Node.js, Axios</p>
+                <p><strong>Tools & Platforms:</strong> Unity, Git, Jira, Maven, Webflow, VSCode, Replit, Trello, Dokku, Lucid, Sanity CMS</p>
+                <p><strong>Research & Methodology:</strong> UX Research, AI Research, Usability Testing, User Interviews, Surveys, User Flows</p>
+            </div>
+             -->
+            <div class="resume-section-group">
+                <h4>PROFESSIONAL EXPERIENCE</h4>
+                <div class="resume-item">
+                    <h3>UX/UI Design and Research Intern @ DT House</h3>
+                    <p>Singapore (June 2025 – August 2025)</p>
+                    <ul>
+                        <li>Designed interactive MVP mockups using Figma to support foundational AI model workflows, improving early-stage UX for data-intensive users.</li>
+                        <li>Revamped company website HTML/CSS/JavaScript to better communicate product value and align with modern design standards, contributing to a clearer user journey and improved data accessibility.</li>
+                        <li>Conducted research and prototype interfaces for AI/robotics dataset exploration, enhancing clarity in non-text data presentation across the data value chain.</li>
+                    </ul>
+                </div>
+                <div class="resume-item">
+                    <h3>UX/UI Design and Web Development Intern @ AINA Technologies</h3>
+                    <p>Lehigh@NASDAQ Innovation Internship (January 2025 – May 2025)</p>
+                    <ul>
+                        <li>Designed intuitive UI/UX features, including speech recognition, transcription, and indicator display functionalities for AINA's web interface, ensuring a seamless and meaningful user experience.</li>
+                        <li>Created wireframes and testable prototypes using Figma to enhance user flow and consistency.</li>
+                        <li>Collaborated with the AINA team to strategize, test, and analyze design components for improving human trafficking training for frontline workers using advanced machine learning models.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resume-section-group">
+                <h4>LEADERSHIP EXPERIENCE</h4>
+                <div class="resume-item">
+                    <h3>Public Relations & Web Development Officer @ Lehigh University Women in Computer Science</h3>
+                    <p>May 2026 – present</p>
+                    <ul>
+                        <li>Design promotional graphics in Canva and contribute to the development and design of the club website using HTML and CSS.</li>
+                        <li>Manage social media content and outreach to increase club visibility and engagement.</li>
+                    </ul>
+                </div>
+                <div class="resume-item">
+                    <h3>Secretary, Social Media Chair @ Lehigh University Vietnamese Student Association</h3>
+                    <p>August 2024 – May 2026</p>
+                    <ul>
+                        <li>Increased club membership by 15% through effective management and optimization of the club's web page and social media.</li>
+                        <li>Documented meeting notes, completed event forms/requests, and coordinated weekly event planning to maintain organized operations.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="resume-download">
+                <a href="resume.pdf" target="_blank" class="btn btn-primary">
+                    [ VIEW FULL RESUME ]
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-socials">
+                <p>
+                <a href="https://www.linkedin.com/in/angelinavle/" class="footer-link" title="LinkedIn" target="_blank">LINKEDIN</a><br>
+                <a href="mailto:angelinale13@gmail.com" class="footer-link" title="Email">angelinale13@gmail.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p>Designed and built by Angelina Le.<br>All rights reserved. © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose">×</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+        </div>
+        <div class="lightbox-nav">
+            <button id="lightboxPrev">← PREV</button>
+            <span class="lightbox-counter"></span>
+            <button id="lightboxNext">NEXT →</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

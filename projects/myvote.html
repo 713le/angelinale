@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myVote — Angelina Le</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo"><img src="../photos/al-logo.svg" alt="Angelina Le"></a>
+            <div class="nav-center">
+                <button class="menu-trigger" id="menuTrigger">[ menu ]</button>
+            </div>
+            <div class="nav-icons">
+                <a href="mailto:angelinale13@gmail.com" class="nav-icon" title="Email" aria-label="Email">
+                    <img src="../photos/mail.svg" alt="Email">
+                </a>
+                <a href="#" class="nav-icon" title="LinkedIn" aria-label="LinkedIn">
+                    <img src="../photos/linkedin.svg" alt="LinkedIn">
+                </a>
+                <!-- <div class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon">◯</span>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <button class="menu-close" id="menuClose">[ close ]</button>
+            <nav class="menu-nav">
+                <a href="../#work" class="menu-item">/ projects</a>
+                <a href="../#about" class="menu-item">/ about</a>
+                <a href="../#resume" class="menu-item">/ experience</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <a href="../index.html#work" class="back-link">← back to work</a>
+            <h1 class="glitch" data-text="MYVOTE">MYVOTE</h1>
+            <p class="project-tagline">VOTER RESOURCE HUB FOR CIVIC ENGAGEMENT</p>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="project-container">
+            <h2>OVERVIEW</h2>
+            <p>MYVOTE IS A COMPREHENSIVE VOTER RESOURCE HUB DEVELOPED COLLABORATIVELY TO EMPOWER CITIZENS WITH ESSENTIAL VOTING INFORMATION. THE PLATFORM PROVIDES ACCESSIBLE RESOURCES FOR FINDING LOCAL CANDIDATES, UNDERSTANDING BALLOT MEASURES, AND SIMPLIFYING THE VOTER REGISTRATION PROCESS. WITH A FOCUS ON USABILITY AND VISUAL CLARITY, MYVOTE MAKES CIVIC PARTICIPATION MORE ACCESSIBLE TO ALL VOTERS.</p>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="project-grid">
+                <div class="project-detail">
+                    <h3>TECHNOLOGIES</h3>
+                    <ul>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JAVASCRIPT</li>
+                        <li>FIGMA</li>
+                    </ul>
+                </div>
+                <div class="project-detail">
+                    <h3>TIMELINE</h3>
+                    <p>JULY 2022 – AUGUST 2022</p>
+                </div>
+                <div class="project-detail">
+                    <h3>TEAM</h3>
+                    <p>3-PERSON TEAM<br>FRONTEND DEVELOPMENT<br>UX/UI DESIGN</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="project-section">
+        <div class="project-container">
+            <h2>KEY FEATURES</h2>
+            <ul class="feature-list">
+                <li>CANDIDATE FINDER — SEARCHABLE DATABASE OF LOCAL CANDIDATES WITH DETAILED PROFILES</li>
+                <li>VOTER REGISTRATION GUIDE — STEP-BY-STEP INSTRUCTIONS FOR VOTER REGISTRATION BY STATE</li>
+                <li>BALLOT INFORMATION — COMPREHENSIVE EXPLANATIONS OF BALLOT MEASURES AND PROPOSITIONS</li>
+                <li>POLLING LOCATION FINDER — LOCATE NEARBY POLLING PLACES AND VOTING TIMES</li>
+                <li>RESPONSIVE DESIGN — OPTIMIZED FOR DESKTOP AND MOBILE DEVICES</li>
+                <li>ACCESSIBILITY FOCUS — DESIGNED WITH CLEAR INFORMATION HIERARCHY AND READABLE TYPOGRAPHY</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Design & Development Approach -->
+    <section class="project-section">
+        <div class="project-container">
+            <h2>DESIGN & DEVELOPMENT</h2>
+            <p>LED FRONT-END DEVELOPMENT AND UX DESIGN FOR THE MYVOTE PROJECT, CRAFTING INTUITIVE LAYOUTS THAT PRIORITIZE ACCESSIBILITY AND VISUAL CLARITY. USED FIGMA FOR WIREFRAMING AND PROTOTYPING TO ENSURE A USER-CENTERED DESIGN PROCESS. THE RESULTING WEBSITE PROVIDES A SMOOTH, USER-FRIENDLY EXPERIENCE THAT REMOVES BARRIERS TO VOTER ENGAGEMENT AND PROMOTES INFORMED CIVIC PARTICIPATION.</p>
+        </div>
+    </section>
+
+    <!-- Next Project -->
+    <section class="project-nav">
+        <div class="project-container">
+            <a href="toolkit.html" class="next-project">NEXT PROJECT: TOOLKIT FOR DISABILITY WELLBEING →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-socials">
+                <p>
+                <a href="https://www.linkedin.com/in/angelinavle/" class="footer-link" title="LinkedIn" target="_blank">LINKEDIN</a><br>
+                <a href="mailto:angelinale13@gmail.com" class="footer-link" title="Email">angelinale13@gmail.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p>Designed and built by Angelina Le.<br>All rights reserved. © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose">×</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+        </div>
+        <div class="lightbox-nav">
+            <button id="lightboxPrev">← PREV</button>
+            <span class="lightbox-counter"></span>
+            <button id="lightboxNext">NEXT →</button>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

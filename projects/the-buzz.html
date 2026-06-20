@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Buzz — Angelina Le</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">AL</a>
+            <button class="menu-trigger" id="menuTrigger">[ menu ]</button>
+            <div class="theme-toggle" id="themeToggle">
+                <span class="theme-icon">◯</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <button class="menu-close" id="menuClose">[ close ]</button>
+            <nav class="menu-nav">
+                <a href="../index.html#work" class="menu-item">work</a>
+                <a href="../index.html#about" class="menu-item">about</a>
+                <a href="../index.html#resume" class="menu-item">resume</a>
+                <a href="../index.html#contact" class="menu-item">contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <a href="../index.html#work" class="back-link">← back to work</a>
+            <h1 class="glitch" data-text="THE BUZZ">THE BUZZ</h1>
+            <p class="project-tagline">SOCIAL MEDIA PLATFORM WITH SECURE BACKEND</p>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="project-container">
+            <h2>OVERVIEW</h2>
+            <p>THE BUZZ is a full-featured social media application built with Flutter and Supabase. The project demonstrates comprehensive software engineering practices, including secure backend architecture with REST APIs, Google OAuth integration, and robust SQL database management. Developed collaboratively in a 5-person team using agile methodologies, the project encompasses the complete lifecycle from UX design to deployment.</p>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="project-grid">
+                <div class="project-detail">
+                    <h3>TECHNOLOGIES</h3>
+                    <ul>
+                        <li>FLUTTER</li>
+                        <li>SUPABASE</li>
+                        <li>REST API</li>
+                        <li>SQL</li>
+                        <li>JIRA</li>
+                        <li>MAVEN</li>
+                        <li>DOKKU</li>
+                    </ul>
+                </div>
+                <div class="project-detail">
+                    <h3>TIMELINE</h3>
+                    <p>OCTOBER 2025 – DECEMBER 2026</p>
+                </div>
+                <div class="project-detail">
+                    <h3>TEAM</h3>
+                    <p>5-PERSON TEAM<br>FULL-STACK DEVELOPMENT<br>PROJECT MANAGEMENT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="project-section">
+        <div class="project-container">
+            <h2>KEY FEATURES</h2>
+            <ul class="feature-list">
+                <li>SECURE BACKEND ARCHITECTURE — REST APIs with authentication and authorization protocols</li>
+                <li>GOOGLE OAUTH INTEGRATION — Seamless third-party authentication</li>
+                <li>SQL DATABASE MANAGEMENT — Robust relational database design for user data and social connections</li>
+                <li>CROSS-PLATFORM DEVELOPMENT — Flutter implementation for iOS and Android</li>
+                <li>UNIT TESTING — Comprehensive test coverage for reliability</li>
+                <li>CONTINUOUS DEPLOYMENT — Dokku deployment pipeline for production releases</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Development Process -->
+    <section class="project-section">
+        <div class="project-container">
+            <h2>DEVELOPMENT PROCESS</h2>
+            <p>This project was managed using Jira and Lucid, employing agile sprint methodology. The team utilized Maven for build automation and dependency management. We practiced continuous integration and deployment using Dokku, ensuring smooth releases and reliable production environments. This collaborative experience strengthened my ability to work in teams, manage complex technical requirements, and deliver high-quality software products.</p>
+        </div>
+    </section>
+
+    <!-- Next Project -->
+    <section class="project-nav">
+        <div class="project-container">
+            <a href="melodia.html" class="next-project">NEXT PROJECT: MELODIA →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>ANGELINA LE © 2025. TECHNOLOGY, FOR EVERYONE.</p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose">×</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+        </div>
+        <div class="lightbox-nav">
+            <button id="lightboxPrev">← PREV</button>
+            <span class="lightbox-counter"></span>
+            <button id="lightboxNext">NEXT →</button>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
