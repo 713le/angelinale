@@ -61,8 +61,7 @@ function initAsciiArtAnimation() {
         if (!isAnimating) return;
         
         chars.forEach((charObj) => {
-            // Randomize delay per character (0-1.5s)
-            const delay = Math.random() * 1500;
+            const delay = Math.random() * 800;
             
             setTimeout(() => {
                 if (!isAnimating) return;

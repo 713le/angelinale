@@ -443,7 +443,8 @@ body.dark-mode .menu-overlay {
     margin-right: 0.5rem;
     display: flex;
     align-items: center;
-    filter: invert(1);
+        filter: invert(1);
+
 }
 
 .btn-with-icon {
