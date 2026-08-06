@@ -197,10 +197,6 @@ function Hero() {
       onMouseMove={onMouseMove} onMouseEnter={() => setInHero(true)}
       onMouseLeave={() => { setInHero(false); setOverLink(false) }} onClick={onClick}>
       <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: `radial-gradient(rgba(0,82,254,0.09) 1px, transparent 1px)`,
-        backgroundSize: "30px 30px",
-      }} />
-      <div className="absolute inset-0 pointer-events-none" style={{
         background: `radial-gradient(450px circle at ${spot.x}% ${spot.y}%, rgba(0,82,254,0.05) 0%, transparent 70%)`,
       }} />
 
@@ -212,18 +208,42 @@ function Hero() {
         [ view work ]
       </div>
 
-      <motion.div className="relative z-10 flex-none max-w-[580px] order-2 md:order-none md:flex-1"
+      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center gap-6 md:hidden">
+        <motion.div className="w-full max-w-[560px]"
+          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
+          <img src="photos/ascii-art.webp" alt="ASCII art" className="w-full h-auto object-contain" />
+        </motion.div>
+
+        <motion.div className="w-full max-w-[580px] flex flex-col items-start text-left"
+          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}>
+          <div style={{ overflow: "hidden", marginBottom: "0.7rem" }}>
+            <motion.h1 onMouseEnter={heroGlitch}
+              initial={{ y: "105%" }} animate={{ y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+              style={{ fontFamily: MONO, fontSize: "clamp(1.5rem, 8vw, 4.8rem)", fontWeight: 500, lineHeight: 0.9, letterSpacing: "-0.03em", color: FG, textTransform: "uppercase", cursor: "none", whiteSpace: "normal", maxWidth: "100%" }}>
+              {heroTxt}
+            </motion.h1>
+          </div>
+          <motion.p className="text-base sm:text-xl tracking-wide uppercase"
+            style={{ fontFamily: MONO, color: FG, lineHeight: 1.2, whiteSpace: "normal", fontSize: "clamp(0.88rem, 3.2vw, 1.5rem)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+            {sub1}
+            <span style={{ color: AC, opacity: sub1.length < "is design-minded & code-fluent.".length ? 1 : 0 }}>█</span>
+          </motion.p>
+        </motion.div>
+      </div>
+
+      <motion.div className="relative z-10 hidden md:flex md:flex-none max-w-[580px] order-2 md:order-none md:flex-1 flex-col items-start"
         initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
-        <div style={{ overflow: "hidden", marginBottom: "1.2rem" }}>
+        <div style={{ overflow: "hidden", marginBottom: "0.6rem" }}>
           <motion.h1 onMouseEnter={heroGlitch}
             initial={{ y: "105%" }} animate={{ y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-            style={{ fontFamily: MONO, fontSize: "clamp(1.5rem, 8vw, 4.8rem)", fontWeight: 500, lineHeight: 0.9, letterSpacing: "-0.03em", color: FG, textTransform: "uppercase", cursor: "none", whiteSpace: "nowrap", maxWidth: "100%" }}>
+            style={{ fontFamily: MONO, fontSize: "clamp(1.5rem, 8vw, 4.8rem)", fontWeight: 500, lineHeight: 0.95, letterSpacing: "-0.03em", color: FG, textTransform: "uppercase", cursor: "none", whiteSpace: "normal", maxWidth: "100%" }}>
             {heroTxt}
           </motion.h1>
         </div>
-        <motion.p className="text-base sm:text-xl md:text-3xl tracking-wide uppercase mb-1.5"
-          style={{ fontFamily: MONO, color: FG, lineHeight: 1.05, whiteSpace: "nowrap", fontSize: "clamp(0.88rem, 3.2vw, 1.5rem)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+        <motion.p className="text-base sm:text-xl md:text-3xl tracking-wide uppercase"
+          style={{ fontFamily: MONO, color: FG, lineHeight: 1.2, whiteSpace: "normal", fontSize: "clamp(0.88rem, 3.2vw, 1.5rem)", marginTop: 0, display: "block" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           {sub1}
           <span style={{ color: AC, opacity: sub1.length < "is design-minded & code-fluent.".length ? 1 : 0 }}>█</span>
         </motion.p>
@@ -248,7 +268,7 @@ function Hero() {
         </motion.div> */}
       </motion.div>
 
-      <motion.div className="relative z-10 flex-none w-full order-1 md:order-none md:w-auto md:ml-auto md:flex md:justify-end"
+      <motion.div className="relative z-10 hidden md:flex md:flex-none w-full order-1 md:order-none md:w-auto md:ml-auto md:justify-end"
         style={{ maxWidth: "100%", transform: `translate(${parallax.x}px, ${parallax.y}px)`, transition: "transform 0.35s ease-out" }}
         initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}>
         <div className="w-full max-w-full overflow-visible md:w-auto md:flex md:justify-end">
