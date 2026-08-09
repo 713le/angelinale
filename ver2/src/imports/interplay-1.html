@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interplay — Angelina Le</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto;
+    user-select: none;
+    /* font-family: system-ui, sans-serif; */
+  }
+
+  /* ── Scene provides perspective ── */
+  #scene {
+    perspective: 2000px;
+    perspective-origin: 50% 40%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  /* ── Book container ── */
+  #book {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    transform: rotateX(6deg);
+    transform-style: preserve-3d;
+    /* box-shadow: 0 60px 80px -20px rgba(0,0,0,0.8); */
+  }
+
+  /* ── Each half panel ── */
+  .panel {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    /* background: #1e1e28; */
+  }
+  /* blank side when cover/back is open */
+  /* .panel.blank { background: #1a1a24; } */
+
+  /* ── Spine ── */
+  /* #spine {
+    width: 0;
+    flex-shrink: 0;
+    background: linear-gradient(to right,
+      #8a7560 0%, #c9aa82 30%, #eddcb8 50%, #c9aa82 70%, #8a7560 100%);
+    box-shadow: 0 0 18px rgba(0,0,0,0.9);
+    z-index: 5;
+  } */
+
+  /* ── Page image layer ── */
+  .page-img {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+  }
+
+  /* ── The animated flip card ── */
+  .flip-card {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    z-index: 20;
+    cursor: pointer;
+    will-change: transform;
+  }
+  .flip-card .f, .flip-card .b {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background-repeat: no-repeat;
+  }
+  /* back face is pre-rotated so when card flips 180° it shows correctly */
+  .flip-card .b { transform: rotateY(180deg); }
+
+  /* hover hint overlay */
+  .flip-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+    pointer-events: none;
+  }
+  .flip-card:hover::after { background: rgba(255,255,255,0.04); }
+
+  /* ── Shadow gradient overlaid on static panels to fake depth ── */
+  .spine-shadow-left {
+    position: absolute;
+    inset: 0;
+    /* background: linear-gradient(to right, rgba(0,0,0,0.35) 0%, transparent 25%); */
+    pointer-events: none;
+    z-index: 3;
+  }
+  .spine-shadow-right {
+    position: absolute;
+    inset: 0;
+    /* background: linear-gradient(to left, rgba(0,0,0,0.25) 0%, transparent 25%); */
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* ── Arrow nav buttons ── */
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #f0f0f0;
+    border: none;
+    color: #000;
+    font-size: 22px;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    z-index: 50;
+    line-height: 1;
+  }
+  .nav-btn:hover { opacity: 0.7; }
+  .nav-btn.hidden { opacity: 0; pointer-events: none; }
+  #btn-prev { right: calc(100% + 14px); }
+  #btn-next { left:  calc(100% + 14px); }
+
+  /* ── Page label ── */
+  #label {
+    /* margin-top: 20px; */
+    margin-bottom: 40px;
+    color: #000;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo"><img src="../photos/al-logo.svg" alt="Angelina Le"></a>
+            <div class="nav-center">
+                <button class="menu-trigger" id="menuTrigger">[ menu ]</button>
+            </div>
+            <div class="nav-icons">
+                <a href="mailto:angelinale13@gmail.com" class="nav-icon" title="Email" aria-label="Email">
+                    <img src="../photos/mail.svg" alt="Email">
+                </a>
+                <a href="#" class="nav-icon" title="LinkedIn" aria-label="LinkedIn">
+                    <img src="../photos/linkedin.svg" alt="LinkedIn">
+                </a>
+                <!-- <div class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon">◯</span>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <button class="menu-close" id="menuClose">[ close ]</button>
+            <nav class="menu-nav">
+                <a href="../#work" class="menu-item">/ projects</a>
+                <a href="../#about" class="menu-item">/ about</a>
+                <a href="../#resume" class="menu-item">/ experience</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <a href="../index.html#work" class="back-link">← back to work</a>
+            <p class="project-case-study">GRAPHIC DESIGN PROJECT</p>
+            <h1 class="glitch" data-text="INTERPLAY">INTERPLAY</h1>
+            <p class="project-tagline">CHAPBOOK DESIGN USING Adobe InDesign & Adobe Illustrator<br>created for Graphic Design Introductory Studio - Taught by Maurizio Masi <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flip through the chapbook below!</p>
+        </div>
+    </section>
+
+<div id="scene">
+  <div id="book">
+    <div class="panel" id="left-panel"></div>
+    <div id="spine"></div>
+    <div class="panel" id="right-panel"></div>
+    <button class="nav-btn" id="btn-prev">‹</button>
+    <button class="nav-btn" id="btn-next">›</button>
+  </div>
+</div>
+<div id="label"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIGURATION — update paths to match your site
+   ═══════════════════════════════════════════════════════════ */
+const IMG = {
+  cover:   '../photos/DES053 - Chapbook (final no bleed).png',
+  back:    '../photos/DES053 - Chapbook (final no bleed)5.png',
+  spreads: [
+    '../photos/DES053 - Chapbook (final no bleed)2.png',
+    '../photos/DES053 - Chapbook (final no bleed)3.png',
+    '../photos/DES053 - Chapbook (final no bleed)4.png',
+  ]
+};
+
+/* ═══════════════════════════════════════════════════════════
+   SIZING
+   Cover & back are square → PAGE_W × PAGE_H where PAGE_W = PAGE_H
+   Spreads are 2:1 → each half is PAGE_W × PAGE_H
+   Book total width = PAGE_W (left) + 16px (spine) + PAGE_W (right)
+   ═══════════════════════════════════════════════════════════ */
+const PAGE_H = Math.min(window.innerHeight * 0.70, 500);
+const PAGE_W = PAGE_H; // square pages
+
+const leftPanel  = document.getElementById('left-panel');
+const rightPanel = document.getElementById('right-panel');
+const book       = document.getElementById('book');
+
+function applySize() {
+  book.style.height       = PAGE_H + 'px';
+  leftPanel.style.width   = PAGE_W + 'px';
+  leftPanel.style.height  = PAGE_H + 'px';
+  rightPanel.style.width  = PAGE_W + 'px';
+  rightPanel.style.height = PAGE_H + 'px';
+}
+applySize();
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+   view 0        → cover (blank left, cover on right)
+   view 1…S      → spread[view-1] open (left half | right half)
+   view S+1      → back (back cover on left, blank right)
+   ═══════════════════════════════════════════════════════════ */
+const S = IMG.spreads.length;
+let view = 0;
+let busy = false;
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS — build background style strings
+   ═══════════════════════════════════════════════════════════ */
+function coverBg()  { return { src: `url('${IMG.cover}')`, pos: 'center center', size: 'cover' }; }
+function backBg()   { return { src: `url('${IMG.back}')`,  pos: 'center center', size: 'cover' }; }
+function blankBg()  { return null; }
+
+// For a 2:1 spread image split into left / right halves:
+// We set background-size to 200% height (so width = 2×PAGE_W) and shift position.
+function spreadBg(idx, side) {
+  return {
+    src:  `url('${IMG.spreads[idx]}')`,
+    pos:  side === 'left' ? 'left center' : 'right center',
+    size: `${PAGE_W * 2}px ${PAGE_H}px`
+  };
+}
+
+function applyBg(el, bg) {
+  if (!bg) { el.style.backgroundImage = 'none'; return; }
+  el.style.backgroundImage    = bg.src;
+  el.style.backgroundPosition = bg.pos;
+  el.style.backgroundSize     = bg.size;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   What sits statically behind the flip card on each panel
+   for the current view:
+     leftBg / rightBg → what's ALREADY on the open page
+   What's on the arriving side (what we're flipping TO):
+     nextLeftBg / nextRightBg
+   ═══════════════════════════════════════════════════════════ */
+function getBgs(v) {
+  if (v === 0) {
+    // cover view: left blank, right = cover
+    return { left: blankBg(), right: coverBg() };
+  }
+  if (v === S + 1) {
+    // back view: left = back, right blank
+    return { left: backBg(), right: blankBg() };
+  }
+  // inner spread
+  const idx = v - 1;
+  return { left: spreadBg(idx, 'left'), right: spreadBg(idx, 'right') };
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RENDER — paint the panels without animation
+   ═══════════════════════════════════════════════════════════ */
+function render() {
+  const bgs = getBgs(view);
+  leftPanel.innerHTML  = '';
+  rightPanel.innerHTML = '';
+
+  // Static backgrounds
+  const lStatic = document.createElement('div');
+  lStatic.className = 'page-img';
+  applyBg(lStatic, bgs.left);
+  leftPanel.appendChild(lStatic);
+
+  const rStatic = document.createElement('div');
+  rStatic.className = 'page-img';
+  applyBg(rStatic, bgs.right);
+  rightPanel.appendChild(rStatic);
+
+  // Spine shadow overlays
+  const lShadow = document.createElement('div');
+  lShadow.className = 'spine-shadow-left';
+  leftPanel.appendChild(lShadow);
+
+  const rShadow = document.createElement('div');
+  rShadow.className = 'spine-shadow-right';
+  rightPanel.appendChild(rShadow);
+
+  // Blank class
+  leftPanel.classList.toggle('blank',  !bgs.left);
+  rightPanel.classList.toggle('blank', !bgs.right);
+
+  updateUI();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FLIP — animated page turn
+   direction: 'forward' | 'backward'
+
+   Forward flip (right page peels left):
+     - flip card lives in rightPanel
+     - hinge at LEFT edge of rightPanel (0%)
+     - front = current right page face
+     - back  = arriving left page of next view (will land in leftPanel)
+     - card rotates 0 → -180deg (swings left over the spine)
+     - at midpoint we swap the static left panel to the next view's left
+     - at end we swap static right panel to next view's right and remove card
+
+   Backward flip (left page peels right):
+     - flip card lives in leftPanel
+     - hinge at RIGHT edge of leftPanel (100%)
+     - front = current left page face
+     - back  = arriving right page of prev view (will land in rightPanel)
+     - card rotates 0 → 180deg (swings right over the spine)
+   ═══════════════════════════════════════════════════════════ */
+const FLIP_MS = 700;
+
+function flip(direction) {
+  if (busy) return;
+  if (direction === 'forward' && view >= S + 1) return;
+  if (direction === 'backward' && view <= 0) return;
+  busy = true;
+
+  const nextView = direction === 'forward' ? view + 1 : view - 1;
+  const nextBgs  = getBgs(nextView);
+  const curBgs   = getBgs(view);
+
+  if (direction === 'forward') {
+    /* ── Right page flips left ── */
+    const card = document.createElement('div');
+    card.className = 'flip-card';
+    card.style.transformOrigin = '0% 50%'; // hinge on left edge of right panel
+
+    // Front face = current right page
+    const front = document.createElement('div');
+    front.className = 'f';
+    applyBg(front, curBgs.right);
+
+    // Back face = arriving left page of nextView (mirrored in place by rotateY(180deg))
+    const back = document.createElement('div');
+    back.className = 'b';
+    applyBg(back, nextBgs.left);
+
+    card.appendChild(front);
+    card.appendChild(back);
+    rightPanel.appendChild(card);
+
+    // Animate with rAF-driven keyframes for the 3D curl effect
+    animateFlip(card, 0, -180, FLIP_MS, (progress) => {
+      // At 50% (card is edge-on), swap the static panels
+      if (progress >= 0.5) {
+        // Update left panel static bg to next view's left
+        const lStatic = leftPanel.querySelector('.page-img');
+        if (lStatic) applyBg(lStatic, nextBgs.left);
+        leftPanel.classList.toggle('blank', !nextBgs.left);
+        // Also update right panel static bg to next view's right
+        const rStatic = rightPanel.querySelector('.page-img');
+        if (rStatic) applyBg(rStatic, nextBgs.right);
+        rightPanel.classList.toggle('blank', !nextBgs.right);
+      }
+    }, () => {
+      // Done — commit state
+      view = nextView;
+      rightPanel.querySelector('.flip-card')?.remove();
+      busy = false;
+      updateUI();
+    });
+
+  } else {
+    /* ── Left page flips right ── */
+    const card = document.createElement('div');
+    card.className = 'flip-card';
+    card.style.transformOrigin = '100% 50%'; // hinge on right edge of left panel
+
+    const front = document.createElement('div');
+    front.className = 'f';
+    applyBg(front, curBgs.left);
+
+    const back = document.createElement('div');
+    back.className = 'b';
+    applyBg(back, nextBgs.right);
+
+    card.appendChild(front);
+    card.appendChild(back);
+    leftPanel.appendChild(card);
+
+    animateFlip(card, 0, 180, FLIP_MS, (progress) => {
+      if (progress >= 0.5) {
+        const rStatic = rightPanel.querySelector('.page-img');
+        if (rStatic) applyBg(rStatic, nextBgs.right);
+        rightPanel.classList.toggle('blank', !nextBgs.right);
+        // Also update left panel static bg to next view's left
+        const lStatic = leftPanel.querySelector('.page-img');
+        if (lStatic) applyBg(lStatic, nextBgs.left);
+        leftPanel.classList.toggle('blank', !nextBgs.left);
+      }
+    }, () => {
+      view = nextView;
+      leftPanel.querySelector('.flip-card')?.remove();
+      busy = false;
+      updateUI();
+    });
+  }
+
+  // Optimistically update nav UI
+  updateUI(nextView);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATE FLIP — rAF loop with easing + perspective skew
+   The "3D curl" effect is achieved by:
+     1. rotateY from startAngle to endAngle
+     2. Adding a slight scaleX compression at the midpoint
+        (simulates the page narrowing as it bends through 90°)
+     3. The perspective on #scene does the rest
+   ═══════════════════════════════════════════════════════════ */
+function easeInOutQuint(t) {
+  return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
+}
+
+function animateFlip(el, fromDeg, toDeg, durationMs, onProgress, onDone) {
+  const start = performance.now();
+  function frame(now) {
+    const raw  = Math.min((now - start) / durationMs, 1);
+    const ease = easeInOutQuint(raw);
+    const deg  = fromDeg + (toDeg - fromDeg) * ease;
+
+    // subtle scaleX: compress slightly toward the middle to mimic page curl
+    // page narrows to ~0.03 at 90° (halfway through) then expands back
+    const bendT   = Math.sin(ease * Math.PI); // 0→1→0 over the flip
+    const scaleX  = 1 - bendT * 0.08;        // narrows by up to 8%
+
+    el.style.transform = `rotateY(${deg}deg) scaleX(${scaleX})`;
+
+    if (onProgress) onProgress(ease);
+
+    if (raw < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      el.style.transform = `rotateY(${toDeg}deg) scaleX(1)`;
+      if (onDone) onDone();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UI UPDATES
+   ═══════════════════════════════════════════════════════════ */
+function updateUI(v) {
+  v = (v !== undefined) ? v : view;
+  const total   = S + 2;
+  const current = v + 1;
+  document.getElementById('label').textContent = `${current} / ${total}`;
+  document.getElementById('btn-prev').classList.toggle('hidden', v <= 0);
+  document.getElementById('btn-next').classList.toggle('hidden', v >= S + 1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EVENTS
+   ═══════════════════════════════════════════════════════════ */
+document.getElementById('btn-next').addEventListener('click', () => flip('forward'));
+document.getElementById('btn-prev').addEventListener('click', () => flip('backward'));
+
+// Click directly on the panels to flip
+rightPanel.addEventListener('click', () => { if (!busy) flip('forward');  });
+leftPanel.addEventListener('click',  () => { if (!busy) flip('backward'); });
+
+// Keyboard
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') flip('forward');
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   flip('backward');
+});
+
+// Swipe
+let touchX = null;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 40) dx < 0 ? flip('forward') : flip('backward');
+  touchX = null;
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════ */
+render();
+</script>
+ <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-socials">
+                <p>
+                <a href="https://www.linkedin.com/in/angelinavle/" class="footer-link" title="LinkedIn" target="_blank">LINKEDIN</a><br>
+                <a href="mailto:angelinale13@gmail.com" class="footer-link" title="Email">angelinale13@gmail.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p>Designed and built by Angelina Le.<br>All rights reserved. © 2026</p>
+        </div>
+    </footer>
+</body>
+</html>

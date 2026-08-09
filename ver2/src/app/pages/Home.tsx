@@ -134,7 +134,7 @@ const FEATURED = [
     description: "Senior Capstone — Accessibility-first web hub with disability resources and community stories in Bethlehem, PA.",
     date: "Jan 2026 — present",
     tech: ["REACT", "NODE.JS", "SANITY"],
-    image: "photos/toolkit.png",
+    image: "photos/toolkit.webp",
     href: "/projects/toolkit",
   },
   {
@@ -142,7 +142,7 @@ const FEATURED = [
     description: "Music rating platform using a binary search algorithm to rank albums by personal preference.",
     date: null,
     tech: ["REACT", "POSTGRESQL", "REST API"],
-    image: "photos/vynl.png",
+    image: "photos/vynl.webp",
     href: "/projects/vynl",
   },
 ]

@@ -1,0 +1,8 @@
+export const BG = "#f5f3ef"
+export const FG = "#0f0e0d"
+export const AC = "#0052fe"
+export const TBG = "#0a0a0a"
+export const BDRC = "rgba(15,14,13,0.1)"
+export const MUTED = "rgba(15,14,13,0.42)"
+export const GC = "!<>-_\\/[]{}=+*^?#@$%&|~"
+export const MONO = "'JetBrains Mono', monospace"

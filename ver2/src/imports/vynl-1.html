@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vynl — Angelina Le</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo"><img src="../photos/al-logo.svg" alt="Angelina Le"></a>
+            <div class="nav-center">
+                <button class="menu-trigger" id="menuTrigger">[ menu ]</button>
+            </div>
+            <div class="nav-icons">
+                <a href="mailto:angelinale13@gmail.com" class="nav-icon" title="Email" aria-label="Email">
+                    <img src="../photos/mail.svg" alt="Email">
+                </a>
+                <a href="#" class="nav-icon" title="LinkedIn" aria-label="LinkedIn">
+                    <img src="../photos/linkedin.svg" alt="LinkedIn">
+                </a>
+                <!-- <div class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon">◯</span>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <button class="menu-close" id="menuClose">[ close ]</button>
+            <nav class="menu-nav">
+                <a href="../#work" class="menu-item">/ projects</a>
+                <a href="../#about" class="menu-item">/ about</a>
+                <a href="../#resume" class="menu-item">/ experience</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <a href="../index.html#work" class="back-link">← back to work</a>
+            <p class="project-case-study">CASE STUDY — PERSONAL PROJECT</p>
+            <h1 class="glitch" data-text="VYNL">VYNL</h1>
+            <p class="project-tagline">A music rating platform using binary search algorithms to rank albums efficiently. Users compare albums across sentiment tiers, with dynamic score redistribution and social features powered by the iTunes API.</p>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="project-section overview-section" id="overview">
+        <div class="project-container">
+            <div class="overview-grid">
+                <!-- Left Column: Project Details -->
+                <div class="overview-left">
+                    <div class="overview-item">
+                        <h3>ROLE</h3>
+                        <p>FULL-STACK DEVELOPER</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>STACK</h3>
+                        <ul>
+                            <li>REACT</li>
+                            <li>POSTGRESQL</li>
+                            <li>SUPABASE</li>
+                            <li>VERCEL</li>
+                        </ul>
+                    </div>
+                    <div class="overview-item">
+                        <h3>TIMELINE</h3>
+                        <p>MARCH 2026 – JUNE 2026</p>
+                    </div>
+                    <div class="overview-item">
+                        <button class="btn" onclick="window.open('https://vynl-music.vercel.app/', '_blank')">
+                            <span>VIEW LIVE SITE</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Context -->
+                <div class="overview-right">
+                    <div class="overview-block">
+                        <h3>BACKGROUND</h3>
+                        <p>INSPIRED BY BELI, A RESTAURANT RATING PLATFORM THAT USES SOPHISTICATED COMPARISON ALGORITHMS, VYNL BRINGS EFFICIENT ALBUM RANKING TO THE WEB. THE PROJECT COMBINES ALGORITHMIC THINKING WITH FULL-STACK DEVELOPMENT TO BUILD A COMPLETE PLATFORM FROM DATABASE DESIGN TO REAL-TIME UI.</p>
+                    </div>
+                    <div class="overview-block">
+                        <h3>THE PROBLEM</h3>
+                        <blockquote class="problem-quote-small">"HOW DO YOU PRECISELY RANK SOMETHING AS SUBJECTIVE AS MUSIC WITHOUT SPENDING HOURS MAKING DIRECT COMPARISONS?"</blockquote>
+                    </div>
+                    <div class="overview-block">
+                        <h3>THE SOLUTION</h3>
+                        <p>USE A BINARY SEARCH ALGORITHM TO MINIMIZE COMPARISONS, ORGANIZE ALBUMS INTO SENTIMENT TIERS, AND DYNAMICALLY REDISTRIBUTE SCORES BASED ON USER FEEDBACK. SEAMLESSLY INTEGRATED WITH ITUNES FOR ALBUM DISCOVERY AND POSTGRESQL FOR SCALABLE DATA PERSISTENCE.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Image -->
+    <section class="project-section hero-image-section">
+        <div class="project-container">
+            <div class="hero-image-placeholder">
+                <img src="../photos/vynl.png" alt="Vynl Platform" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <!-- Who It's For -->
+    <section class="project-section" id="context">
+        <div class="project-container">
+            <h2>WHO IT'S FOR</h2>
+            <ul class="who-its-for-list">
+                <li>MUSIC ENTHUSIASTS</li>
+                <li>COLLECTORS & VINYL LOVERS</li>
+                <li>PEOPLE WHO WANT PRECISE RANKING SYSTEMS</li>
+                <li>ANYONE WHO VALUES EFFICIENT ALGORITHMS</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="project-section" id="features">
+        <div class="project-container">
+            <h2>KEY FEATURES</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <img src="../photos/binary.png" alt="Binary Search Algorithm" class="feature-image">
+                    <h4>BINARY SEARCH ALGORITHM</h4>
+                    <p>RANKS ALBUMS IN O(LOG N) COMPARISONS WITH DYNAMIC SCORE REDISTRIBUTION ACROSS SENTIMENT TIERS (LIKED, OK, DISLIKED). MINIMIZES USER EFFORT WHILE MAINTAINING RANKING PRECISION.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="../photos/search-results.png" alt="Search Results" class="feature-image">
+                    <h4>ITUNES API INTEGRATION</h4>
+                    <p>SEAMLESS ALBUM SEARCH AND METADATA RETRIEVAL. USERS CAN DISCOVER AND RATE MILLIONS OF ALBUMS WITHOUT MANUAL DATA ENTRY.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="../photos/vynl-login.png" alt="Login Page" class="feature-image">
+                    <h4>USER AUTHENTICATION</h4>
+                    <p>SECURE LOGIN AND PROFILE MANAGEMENT WITH BCRYPT PASSWORD HASHING. USERS MAINTAIN PERSISTENT RATINGS ACROSS SESSIONS.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="../photos/vynl-profile.png" alt="Profile Page" class="feature-image">
+                    <h4>SOCIAL FEATURES</h4>
+                    <p>FOLLOW OTHER USERS, VIEW THEIR RANKINGS, AND BUILD A MUSIC COMMUNITY. SEE HOW YOUR TASTE COMPARES TO FRIENDS.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>REAL-TIME UPDATES</h4>
+                    <p>LIVE RANKING CHANGES AS USERS RATE ALBUMS. DYNAMIC UI REFLECTS NEW COMPARISONS INSTANTLY WITHOUT PAGE RELOADS.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>SERVERLESS ARCHITECTURE</h4>
+                    <p>DEPLOYED ON VERCEL WITH SUPABASE POSTGRESQL DATABASE. FULLY MANAGED INFRASTRUCTURE MEANS ZERO MAINTENANCE AND AUTOMATIC SCALING.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What I Learned -->
+    <section class="project-section" id="learnings">
+        <div class="project-container">
+            <h2>WHAT I LEARNED</h2>
+            <p>THIS PROJECT DEEPENED MY UNDERSTANDING OF ALGORITHM OPTIMIZATION IN REAL-WORLD APPLICATIONS. THE BINARY SEARCH IMPLEMENTATION TAUGHT ME HOW TO BALANCE USER EXPERIENCE WITH COMPUTATIONAL EFFICIENCY. I GAINED VALUABLE EXPERIENCE IN FULL-STACK DEVELOPMENT — ARCHITECTING A SCALABLE REACT FRONTEND WITH A ROBUST POSTGRESQL BACKEND, DEPLOYING TO VERCEL'S SERVERLESS ENVIRONMENT, AND MANAGING STATE ACROSS COMPLEX USER INTERACTIONS.</p>
+            <div class="learnings-grid">
+                <div class="learning-tag">ALGORITHM DESIGN</div>
+                <div class="learning-tag">REACT STATE MANAGEMENT</div>
+                <div class="learning-tag">POSTGRESQL</div>
+                <div class="learning-tag">REST APIs</div>
+                <div class="learning-tag">SERVERLESS DEPLOYMENT</div>
+                <div class="learning-tag">API INTEGRATION</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Navigation -->
+    <nav class="case-study-nav">
+        <div class="case-study-nav-content">
+            <a href="#" class="nav-section-link">↑ TOP</a>
+            <a href="#overview" class="nav-section-link">OVERVIEW</a>
+            <a href="#context" class="nav-section-link">CONTEXT</a>
+            <a href="#features" class="nav-section-link">FEATURES</a>
+            <a href="#learnings" class="nav-section-link">LEARNINGS</a>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-socials">
+                <p>
+                <a href="https://www.linkedin.com/in/angelinavle/" class="footer-link" title="LinkedIn" target="_blank">LINKEDIN</a><br>
+                <a href="mailto:angelinale13@gmail.com" class="footer-link" title="Email">angelinale13@gmail.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p>Designed and built by Angelina Le.<br>All rights reserved. © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose">×</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+        </div>
+        <div class="lightbox-nav">
+            <button id="lightboxPrev">← PREV</button>
+            <span class="lightbox-counter"></span>
+            <button id="lightboxNext">NEXT →</button>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
