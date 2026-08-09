@@ -130,7 +130,7 @@ function AsciiArt() {
 
 const FEATURED = [
   {
-    title: "TOOLKIT FOR DISABILITY WELLBEING",
+    title: "TOOLKIT FOR DISABILITY WELLBEING IN BETHLEHM",
     description: "Senior Capstone — Accessibility-first web hub with disability resources and community stories in Bethlehem, PA.",
     date: "Jan 2026 — present",
     tech: ["REACT", "NODE.JS", "SANITY"],
