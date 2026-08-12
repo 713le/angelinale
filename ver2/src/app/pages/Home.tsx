@@ -5,8 +5,8 @@ import { useGlitch, useTypewriter, useInView } from "../hooks"
 import { BG, FG, AC, BDRC, MUTED, MONO } from "../constants"
 import Footer from "../components/Footer"
 
-// Use root `/photos/` thumbnail for MenuLens to match other pages
-const MENULENS_THUMB = '/photos/menulens-mockup-2.webp'
+// // Use root `/photos/` thumbnail for MenuLens to match other pages
+// const MENULENS_THUMB = '/photos/menulens-mockup-2.webp'
 
 // ─── ASCII art ────────────────────────────────────────────────────────────────
 
@@ -137,7 +137,7 @@ const FEATURED = [
     description: "Menu visualizer app",
     date: "Aug 2026",
     tech: ["FIGMA", "ILLUSTRATOR"],
-    image: MENULENS_THUMB,
+    image: "/photos/menulens-mockup-2.webp",
     href: "/projects/menulens",
   },
   {
