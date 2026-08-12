@@ -5,19 +5,6 @@ import ProjectHero from "../../components/ProjectHero"
 import CaseStudyNav from "../../components/CaseStudyNav"
 import Footer from "../../components/Footer"
 
-// Resolve image assets so the bundler includes them and paths work in production
-const IMG = {
-  menulensMockup2: new URL("../../../../photos/menulens-mockup-2.webp", import.meta.url).href,
-  menulensSketches: new URL("../../../../photos/menulens-sketches.webp", import.meta.url).href,
-  menulensUserFlow: new URL("../../../../photos/menulens-user-flow.webp", import.meta.url).href,
-  menulensDiagram1: new URL("../../../../photos/menulens-diagram1.webp", import.meta.url).href,
-  menulensDiagram2: new URL("../../../../photos/menulens-diagram2.webp", import.meta.url).href,
-  menulensDiagram3: new URL("../../../../photos/menulens-diagram3.webp", import.meta.url).href,
-  menulensDiagram4: new URL("../../../../photos/menulens-diagram4.webp", import.meta.url).href,
-  menulensMockup: new URL("../../../../photos/menulens-mockup.webp", import.meta.url).href,
-  menulensAppMockup: new URL("../../../../photos/menulens-app-mockup.webp", import.meta.url).href,
-}
-
 const NAV_SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "research", label: "Research" },
@@ -179,7 +166,7 @@ export default function MenuLens() {
       {/* Hero image — replace with your key mockup/hero shot */}
       <div className="px-4 md:px-8 mb-4">
         <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
-          <img src={IMG.menulensMockup2} alt="MenuLens app" className="w-full h-auto" />
+          <img src="/photos/menulens-mockup-2.webp" alt="MenuLens app" className="w-full h-auto" />
         </div>
       </div>
 
@@ -261,12 +248,12 @@ export default function MenuLens() {
 
         {/* Replace with your early paper sketches and the FigJam user-flow export */}
         <MediaBlock
-          src={IMG.menulensSketches}
+          src="/photos/menulens-sketches.webp"
           alt="Early digital sketches for MenuLens"
           caption="Early digital sketches — first pass at the scan-to-results flow"
         />
         <MediaBlock
-          src={IMG.menulensUserFlow}
+          src="/photos/menulens-user-flow.webp"
           alt="MenuLens user flow chart"
           caption="Full user flow — camera capture, community menu search, results, and settings"
         />
@@ -297,10 +284,10 @@ export default function MenuLens() {
         <SectionHeading>What MenuLens does</SectionHeading>
         <div className="grid grid-cols-1 gap-30 mt-2">
           {[
-            { img: IMG.menulensDiagram1, title: "Community Menus", desc: "Search for a restaurant before you even open the camera. If someone's already scanned that menu, you get instant photos and translations" },
-            { img: IMG.menulensDiagram2, title: "In-App Camera & Translation", desc: "Scan a menu directly in-app, or pull photos from your library. Multi-page capture and on-device translation turn a photographed menu into a structured, visual list of dishes." },
-            { img: IMG.menulensDiagram3, title: "Visual Menu Results", desc: "Every dish gets a photo, a bilingual name and description, and a category tag. Tap to expand, favorite, or filter the whole menu down to just what you're craving." },
-            { img: IMG.menulensDiagram4, title: "Dietary Restriction Settings", desc: "Set restrictions once in Settings. MenuLens applies them across every menu you view from then on, and flags conflicting dishes automatically instead of making you re-check by hand." },
+            { img: "/photos/menulens-diagram1.webp", title: "Community Menus", desc: "Search for a restaurant before you even open the camera. If someone's already scanned that menu, you get instant photos and translations" },
+            { img: "/photos/menulens-diagram2.webp", title: "In-App Camera & Translation", desc: "Scan a menu directly in-app, or pull photos from your library. Multi-page capture and on-device translation turn a photographed menu into a structured, visual list of dishes." },
+            { img: "/photos/menulens-diagram3.webp", title: "Visual Menu Results", desc: "Every dish gets a photo, a bilingual name and description, and a category tag. Tap to expand, favorite, or filter the whole menu down to just what you're craving." },
+            { img: "/photos/menulens-diagram4.webp", title: "Dietary Restriction Settings", desc: "Set restrictions once in Settings. MenuLens applies them across every menu you view from then on, and flags conflicting dishes automatically instead of making you re-check by hand." },
           ].map(({ img, title, desc }) => (
             <div key={title} className="flex flex-col gap-6">
               <div>
@@ -319,12 +306,12 @@ export default function MenuLens() {
 
         {/* Optional: drop in a few labeled mockup/screenshot close-ups here */}
         <MediaBlock
-          src={IMG.menulensMockup}
+          src="/photos/menulens-mockup.webp"
           alt="MenuLens mockup screens"
           caption=""
         />
         <MediaBlock
-          src={IMG.menulensAppMockup}
+          src="/photos/menulens-app-mockup.webp"
           alt="MenuLens mockup screens"
           caption=""
         />

@@ -134,7 +134,7 @@ const FEATURED = [
     description: "Menu visualizer app",
     date: "Aug 2026",
     tech: ["FIGMA", "ILLUSTRATOR"],
-    image: "photos/menulens-mockup-2.webp",
+    image: "/photos/menulens-mockup-2.webp",
     href: "/projects/menulens",
   },
   {
@@ -142,7 +142,7 @@ const FEATURED = [
     description: "Senior Capstone — Accessibility-first web hub with disability resources and community stories in Bethlehem, PA.",
     date: "Jan 2026 — present",
     tech: ["REACT", "NODE.JS", "SANITY"],
-    image: "photos/toolkit.webp",
+    image: "/photos/toolkit.webp",
     href: "/projects/toolkit",
   },
   {
@@ -150,7 +150,7 @@ const FEATURED = [
     description: "Music rating platform using a binary search algorithm to rank albums by personal preference.",
     date: null,
     tech: ["REACT", "POSTGRESQL", "REST API"],
-    image: "photos/vynl.webp",
+    image: "/photos/vynl.webp",
     href: "/projects/vynl",
   },
 ]
@@ -219,7 +219,7 @@ function Hero() {
       <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center gap-6 md:hidden">
         <motion.div className="w-full max-w-[560px]"
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-          <img src="photos/ascii-art.webp" alt="ASCII art" className="w-full h-auto object-contain" />
+          <img src="/photos/ascii-art.webp" alt="ASCII art" className="w-full h-auto object-contain" />
         </motion.div>
 
         <motion.div className="w-full max-w-[580px] flex flex-col items-start text-left"
