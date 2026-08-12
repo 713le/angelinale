@@ -3,6 +3,7 @@ import Root from "./Root"
 import Home from "./pages/Home"
 import Toolkit from "./pages/projects/Toolkit"
 import Vynl from "./pages/projects/Vynl"
+import Menulens from "./pages/projects/Menulens"
 import Interplay from "./pages/projects/Interplay"
 import LifeOfPi from "./pages/projects/LifeOfPi"
 import Parasite from "./pages/projects/Parasite"
@@ -18,6 +19,7 @@ export const router = createHashRouter([
     children: [
       { index: true, Component: Home },
       { path: "projects/toolkit", Component: Toolkit },
+      { path: "projects/menulens", Component: Menulens },
       { path: "projects/vynl", Component: Vynl },
       { path: "projects/interplay", Component: Interplay },
       { path: "projects/life-of-pi", Component: LifeOfPi },

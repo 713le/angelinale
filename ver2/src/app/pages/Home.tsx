@@ -130,6 +130,14 @@ function AsciiArt() {
 
 const FEATURED = [
   {
+    title: "MENULENS",
+    description: "Menu visualizer app",
+    date: "Aug 2026",
+    tech: ["FIGMA", "ILLUSTRATOR"],
+    image: "photos/menulens-mockup-2.webp",
+    href: "/projects/menulens",
+  },
+  {
     title: "TOOLKIT FOR DISABILITY WELLBEING IN BETHLEHM",
     description: "Senior Capstone — Accessibility-first web hub with disability resources and community stories in Bethlehem, PA.",
     date: "Jan 2026 — present",
@@ -378,7 +386,7 @@ function Gallery() {
   return (
     <div className="mt-14 pt-10 border-t" style={{ borderColor: BDRC }}>
       <div className="flex items-center justify-between mb-5">
-        <p style={{ fontFamily: MONO, fontSize: "0.62rem", letterSpacing: "0.12em", color: MUTED, textTransform: "uppercase" }}>Gallery — drag to explore</p>
+        <p style={{ fontFamily: MONO, fontSize: "0.8rem", letterSpacing: "0.12em", color: MUTED, textTransform: "uppercase" }}>Fun!</p>
         <div className="flex gap-2">
           {["←", "→"].map((a, ai) => (
             <button key={a} onClick={() => scrollRef.current?.scrollBy({ left: ai === 0 ? -280 : 280, behavior: "smooth" })}

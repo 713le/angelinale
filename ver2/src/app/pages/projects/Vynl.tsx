@@ -17,7 +17,7 @@ function Section({ id, label, children }: { id: string; label: string; children:
   const { ref, vis } = useInView("-40px")
   return (
     <motion.section id={id} ref={ref as React.RefObject<HTMLElement>}
-      className="px-6 md:px-12 max-w-5xl mx-auto py-20 border-t" style={{ borderColor: BDRC }}
+      className="px-4 md:px-8 py-20 border-t" style={{ borderColor: BDRC }}
       initial={{ opacity: 0, y: 24 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
       <p className="text-[0.58rem] tracking-[0.2em] uppercase mb-8" style={{ fontFamily: MONO, color: AC }}>{label}</p>
       {children}
@@ -66,7 +66,7 @@ export default function Vynl() {
       />
 
       {/* Metadata grid */}
-      <div className="px-6 md:px-12 max-w-5xl mx-auto pb-16">
+      <div className="px-4 md:px-8 pb-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-b py-8" style={{ borderColor: BDRC }}>
           {[
             { label: "Role", value: "Full-Stack Developer" },
@@ -92,7 +92,7 @@ export default function Vynl() {
       </div>
 
       {/* Hero image */}
-      <div className="px-6 md:px-12 max-w-5xl mx-auto mb-4">
+      <div className="px-4 md:px-8 mb-4">
         <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
           <img src="/photos/vynl.webp" alt="VYNL music platform" className="w-full h-auto" />
         </div>

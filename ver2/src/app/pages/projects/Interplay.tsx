@@ -205,7 +205,7 @@ export default function Interplay() {
         tagline="Chapbook design using Adobe InDesign & Adobe Illustrator. Created for Graphic Design Introductory Studio, taught by Maurizio Masi. Flip through the book below."
       />
       <BookViewer />
-      <div className="px-6 md:px-12 max-w-5xl mx-auto py-8 border-t" style={{ borderColor: BDRC }}>
+      <div className="px-4 md:px-8 py-8 border-t" style={{ borderColor: BDRC }}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[["Tools", "InDesign · Illustrator"], ["Type", "Graphic Chapbook"], ["Course", "Graphic Design Intro"], ["Instructor", "Maurizio Masi"]].map(([l, v]) => (
             <div key={l}>
