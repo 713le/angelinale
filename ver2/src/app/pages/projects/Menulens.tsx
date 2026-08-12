@@ -166,7 +166,7 @@ export default function MenuLens() {
       {/* Hero image — replace with your key mockup/hero shot */}
       <div className="px-4 md:px-8 mb-4">
         <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
-          <img src="/photos/menulens-mockup-2.webp" alt="MenuLens app" className="w-full h-auto" />
+          <img src="photos/menulens-mockup-2.webp" alt="MenuLens app" className="w-full h-auto" />
         </div>
       </div>
 
@@ -248,12 +248,12 @@ export default function MenuLens() {
 
         {/* Replace with your early paper sketches and the FigJam user-flow export */}
         <MediaBlock
-          src="/photos/menulens-sketches.webp"
+          src="photos/menulens-sketches.webp"
           alt="Early digital sketches for MenuLens"
-          caption="Early digital sketches"
+          caption="Early digital sketches — first pass at the scan-to-results flow"
         />
         <MediaBlock
-          src="/photos/menulens-user-flow.webp"
+          src="photos/menulens-user-flow.webp"
           alt="MenuLens user flow chart"
           caption="Full user flow — camera capture, community menu search, results, and settings"
         />
@@ -306,12 +306,12 @@ export default function MenuLens() {
 
         {/* Optional: drop in a few labeled mockup/screenshot close-ups here */}
         <MediaBlock
-          src="/photos/menulens-mockup.webp"
+          src="photos/menulens-mockup.webp"
           alt="MenuLens mockup screens"
           caption=""
         />
         <MediaBlock
-          src="/photos/menulens-app-mockup.webp"
+          src="photos/menulens-app-mockup.webp"
           alt="MenuLens mockup screens"
           caption=""
         />
