@@ -5,17 +5,17 @@ import ProjectHero from "../../components/ProjectHero"
 import CaseStudyNav from "../../components/CaseStudyNav"
 import Footer from "../../components/Footer"
 
-// Bundler-resolved MenuLens assets (keeps other pages unchanged)
+// Use root `/photos/` to match the site's other image strategy
 const IMG = {
-  menulensMockup2: new URL('../../../assets/photos/menulens-mockup-2.webp', import.meta.url).href,
-  menulensSketches: new URL('../../../assets/photos/menulens-sketches.webp', import.meta.url).href,
-  menulensUserFlow: new URL('../../../assets/photos/menulens-user-flow.webp', import.meta.url).href,
-  menulensDiagram1: new URL('../../../assets/photos/menulens-diagram1.webp', import.meta.url).href,
-  menulensDiagram2: new URL('../../../assets/photos/menulens-diagram2.webp', import.meta.url).href,
-  menulensDiagram3: new URL('../../../assets/photos/menulens-diagram3.webp', import.meta.url).href,
-  menulensDiagram4: new URL('../../../assets/photos/menulens-diagram4.webp', import.meta.url).href,
-  menulensMockup: new URL('../../../assets/photos/menulens-mockup.webp', import.meta.url).href,
-  menulensAppMockup: new URL('../../../assets/photos/menulens-app-mockup.webp', import.meta.url).href,
+  menulensMockup2: '/photos/menulens-mockup-2.webp',
+  menulensSketches: '/photos/menulens-sketches.webp',
+  menulensUserFlow: '/photos/menulens-user-flow.webp',
+  menulensDiagram1: '/photos/menulens-diagram1.webp',
+  menulensDiagram2: '/photos/menulens-diagram2.webp',
+  menulensDiagram3: '/photos/menulens-diagram3.webp',
+  menulensDiagram4: '/photos/menulens-diagram4.webp',
+  menulensMockup: '/photos/menulens-mockup.webp',
+  menulensAppMockup: '/photos/menulens-app-mockup.webp',
 }
 
 const NAV_SECTIONS = [

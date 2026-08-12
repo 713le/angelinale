@@ -5,8 +5,8 @@ import { useGlitch, useTypewriter, useInView } from "../hooks"
 import { BG, FG, AC, BDRC, MUTED, MONO } from "../constants"
 import Footer from "../components/Footer"
 
-// Bundler-resolved thumbnail for MenuLens (ensures homepage thumbnail works in production)
-const MENULENS_THUMB = new URL('../../assets/photos/menulens-mockup-2.webp', import.meta.url).href
+// Use root `/photos/` thumbnail for MenuLens to match other pages
+const MENULENS_THUMB = '/photos/menulens-mockup-2.webp'
 
 // ─── ASCII art ────────────────────────────────────────────────────────────────
 
