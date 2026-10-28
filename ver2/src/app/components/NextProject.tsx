@@ -8,6 +8,7 @@ const PROJECTS = [
   { path: "/projects/toolkit", title: "TOOLKIT FOR DISABILITY WELLBEING", image: "/photos/toolkit.webp" },
   { path: "/projects/vynl", title: "VYNL", image: "/photos/vynl.webp" },
   { path: "/projects/interplay", title: "INTERPLAY", image: "/photos/Chapbook%20Mockup%20Inside%20Pages.jpg" },
+  { path: "/projects/letterform-exchange", title: "LETTERFORM EXCHANGE", image: "/photos/letterform-poster-mockup.png" },
   { path: "/projects/life-of-pi", title: "LIFE OF PI", image: "/photos/lifeofpicovermockup.png" },
   { path: "/projects/parasite", title: "PARASITE", image: "/photos/parasite.png" },
   { path: "/projects/nostalgia", title: "NOSTALGIA", image: "/photos/final-print.png" },

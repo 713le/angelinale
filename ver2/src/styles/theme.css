@@ -129,6 +129,13 @@
     box-shadow: none !important;
   }
 
+  #root :where(a, button, [tabindex]):focus-visible {
+    outline: 3px solid #285f32 !important;
+    outline-offset: 4px !important;
+    position: relative;
+    z-index: 1;
+  }
+
   #root .project-meta-tag {
     border: 1px solid var(--foreground) !important;
   }

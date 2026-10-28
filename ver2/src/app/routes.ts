@@ -12,6 +12,7 @@ import Nostalgia from "./pages/projects/Nostalgia"
 import BoatScene from "./pages/projects/BoatScene"
 import Cats from "./pages/projects/Cats"
 import RecordPlayer from "./pages/projects/RecordPlayer"
+import LetterformExchange from "./pages/projects/LetterformExchange"
 import Doodle from "./pages/Doodle"
 
 export const router = createHashRouter([
@@ -31,6 +32,7 @@ export const router = createHashRouter([
       { path: "projects/lazy-lake", Component: BoatScene },
       { path: "projects/cats", Component: Cats },
       { path: "projects/record-player", Component: RecordPlayer },
+      { path: "projects/letterform-exchange", Component: LetterformExchange },
       { path: "doodle", Component: Doodle },
     ],
   },

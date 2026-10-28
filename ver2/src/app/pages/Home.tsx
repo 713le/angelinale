@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Star } from "lucide-react"
-import { Link, useNavigate } from "react-router"
+import { Link } from "react-router"
 import { useInView } from "../hooks"
 import { BG, FG, AC, BDRC, MUTED, MONO } from "../constants"
 import Footer from "../components/Footer"
@@ -194,7 +194,8 @@ interface GalleryProject {
 
 const GALLERY: GalleryProject[] = [
   { title: "INTERPLAY", sub: "Graphic chapbook design", img: "photos/Chapbook Mockup Inside Pages.jpg", href: "/projects/interplay" },
-    { title: "WICS WEBSITE", sub: "Website redesign for Lehigh WiCS", img: "photos/wics-website.jpg", href: "https://wics.cse.lehigh.edu/", external: true, cursorLabel: "view website" },
+  { title: "LETTERFORM EXCHANGE", sub: "Typography and poster design", img: "photos/letterform-poster-mockup.png", href: "/projects/letterform-exchange" },
+    { title: "WICS WEBSITE", sub: "Website redesign for Lehigh WiCS", img: "photos/wics-site-mockup.jpg", href: "https://wics.cse.lehigh.edu/", external: true, cursorLabel: "view website" },
   { title: "LAZY LAKE", sub: "P5.js poster", img: "photos/boat-scene.gif", href: "/projects/lazy-lake" },
 
     { title: "INTERACTIVE RECORD PLAYER", sub: "Blender and Unity", img: "photos/recordplayerred.png", href: "/projects/record-player" },
@@ -330,7 +331,6 @@ function GalleryCard({ g }: { g: GalleryProject }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [hov, setHov] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
   const onMove = (e: React.MouseEvent) => {
     const r = ref.current?.getBoundingClientRect(); if (!r) return
     setTilt({ x: ((e.clientY - r.top) / r.height - 0.5) * -14, y: ((e.clientX - r.left) / r.width - 0.5) * 14 })
@@ -346,8 +346,7 @@ function GalleryCard({ g }: { g: GalleryProject }) {
         cursor: g.href ? "none" : "default",
       }}
       onMouseMove={onMove} onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHov(false) }}
-      onClick={() => { if (g.href && !g.external) navigate(g.href) }}>
+      onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHov(false) }}>
       {g.img ? (
         <img src={`/${g.img}`} alt={g.title} loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500"
@@ -370,10 +369,14 @@ function GalleryCard({ g }: { g: GalleryProject }) {
       </div>
     </div>
   )
-    return g.external && g.href ? (
+    return g.href ? g.external ? (
       <a href={g.href} target="_blank" rel="noopener noreferrer" className="block shrink-0 no-underline">
         {card}
       </a>
+    ) : (
+      <Link to={g.href} className="block shrink-0 no-underline">
+        {card}
+      </Link>
     ) : card
 }
 
@@ -391,7 +394,7 @@ function Gallery() {
       <div className="mb-7 flex items-end justify-between gap-4">
         <div>
           {/* <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-foreground/60">Side projects / experiments</p> */}
-          <h3 className="text-3xl font-extrabold uppercase md:text-5xl">Play</h3>
+          <h3 className="text-3xl font-extrabold uppercase md:text-5xl">Archive</h3>
         </div>
         <div className="flex gap-2">
           {[
@@ -399,17 +402,16 @@ function Gallery() {
             { Icon: ArrowRight, label: "Scroll gallery right", distance: 280 },
           ].map(({ Icon, label, distance }) => (
             <button key={label} aria-label={label} title={label}
+              aria-controls="project-archive"
               onClick={() => scrollRef.current?.scrollBy({ left: distance, behavior: "smooth" })}
               className="inline-flex size-11 items-center justify-center border-2 border-foreground bg-transparent text-foreground transition-colors hover:bg-accent hover:text-foreground"
-              style={{ cursor: "pointer" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = AC; (e.currentTarget as HTMLButtonElement).style.color = FG }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = BDRC; (e.currentTarget as HTMLButtonElement).style.color = MUTED }}>
+              style={{ cursor: "pointer" }}>
               <Icon aria-hidden="true" size={16} strokeWidth={2.5} />
             </button>
           ))}
         </div>
       </div>
-      <div ref={scrollRef} className="flex gap-4 overflow-x-auto pb-4 select-none"
+      <div id="project-archive" ref={scrollRef} className="flex gap-4 overflow-x-auto pb-4 select-none"
         style={{ scrollbarWidth: "none", cursor: isDrag ? "grabbing" : "grab" }}
         onMouseDown={onDown} onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={onUp}>
         {GALLERY.map(g => <GalleryCard key={g.title} g={g} />)}
