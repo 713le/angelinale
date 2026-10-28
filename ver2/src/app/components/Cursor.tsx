@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion } from "motion/react"
 import { Circle } from "lucide-react"
-import { AC, BG, MONO } from "../constants"
+import { AC, FG, MONO } from "../constants"
 
 type CursorMode = "default" | "text" | "link" | "project" | "gallery" | "doodle"
 
@@ -12,6 +12,7 @@ export default function Cursor() {
   const raf = useRef<number | null>(null)
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState<CursorMode>("default")
+  const [projectLabel, setProjectLabel] = useState("view case study")
   const [doodleTool, setDoodleTool] = useState<"pen" | "eraser">("pen")
   const [showCursor, setShowCursor] = useState(false)
 
@@ -38,8 +39,14 @@ export default function Cursor() {
       const link = el.closest("a,button")
       const text = el.closest("p,h1,h2,h3,h4,h5,h6,li,blockquote,figcaption,dt,dd")
       if (document.documentElement.dataset.doodle === "true") { setMode("doodle") }
-      else if (proj) { setMode("project") }
-      else if (gallery) { setMode("gallery") }
+      else if (proj) {
+        setMode("project")
+        setProjectLabel(proj.getAttribute("data-cursor-label") || "view case study")
+      }
+      else if (gallery) {
+        setMode("gallery")
+        setProjectLabel(gallery.getAttribute("data-cursor-label") || "view overview")
+      }
       else if (link) { setMode("link") }
       else if (text) { setMode("text") }
       else { setMode("default") }
@@ -77,7 +84,7 @@ export default function Cursor() {
   const isText = mode === "text"
   const isDoodle = mode === "doodle"
   const isDoodleEraser = isDoodle && doodleTool === "eraser"
-  const pillLabel = mode === "gallery" ? "view overview" : "view case study"
+  const pillLabel = projectLabel
 
   if (!showCursor) return null
 
@@ -88,7 +95,7 @@ export default function Cursor() {
         <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.7, opacity: 0 }} transition={{ duration: 0.15 }}
           style={{ transform: "translate(-50%,-50%)", padding: "0.38rem 0.9rem", borderRadius: "999px",
-            background: AC, color: BG, fontFamily: MONO, fontSize: "0.58rem", fontWeight: 700,
+            background: AC, color: FG, fontFamily: MONO, fontSize: "0.58rem", fontWeight: 700,
             letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
           {pillLabel}
         </motion.div>

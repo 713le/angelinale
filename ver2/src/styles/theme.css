@@ -129,6 +129,10 @@
     box-shadow: none !important;
   }
 
+  #root .project-meta-tag {
+    border: 1px solid var(--foreground) !important;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }

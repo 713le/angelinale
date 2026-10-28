@@ -132,49 +132,77 @@ function AsciiArt() {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const FEATURED = [
+interface FeaturedProject {
+  title: string
+  description: string
+  tags: string[]
+  image: string
+  href: string
+  external?: boolean
+  cursorLabel?: string
+}
+
+const FEATURED: FeaturedProject[] = [
+  {
+    title: "ACCESSLY",
+    description: "A shared accessibility audit workspace that helps design and engineering teams find barriers before they reach users.",
+    tags: ["Oct 2026", "Product design", "Accessibility"],
+    image: "/photos/accessly-mockup.webp",
+    href: "/projects/accessly",
+    cursorLabel: "coming soon",
+  },
+  {
+    title: "MATCHA CLOUD",
+    description: "A first-time-friendly shop that makes matcha easier to choose.",
+    tags: ["Sep 2026", "Mobile e-commerce", "Product design"],
+    image: "/photos/matcha-cloud-mockups.png",
+    href: "https://medium.com/@avl227/matcha-cloud-mobile-e-commerce-0b6b6a21fdd7?postPublishedType=repub",
+    external: true,
+    cursorLabel: "read article",
+  },
   {
     title: "MENULENS",
-    description: "Menu visualizer app",
-    date: "Aug 2026",
-    tech: ["FIGMA", "ILLUSTRATOR"],
+    description: "Turn unfamiliar menus into dishes you can picture before ordering.",
+    tags: ["Aug 2026", "Product design", "Figma"],
     image: "/photos/menulens-mockup-2.webp",
     href: "/projects/menulens",
   },
   {
-    title: "ACCESSLY",
-    description: "Accessible resources hub",
-    date: "Jun 2026",
-    tech: ["FIGMA", "REACT"],
-    image: "/photos/accessly-mockup.webp",
-    href: "/projects/accessly",
-  },
-  {
     title: "TOOLKIT FOR DISABILITY WELLBEING IN BETHLEHEM",
-    description: "Senior Capstone — Accessibility-first web hub with disability resources and community stories in Bethlehem, PA.",
-    date: "Jan 2026 — present",
-    tech: ["REACT", "NODE.JS", "SANITY"],
+    description: "A Bethlehem resource hub connecting disabled residents with support and community.",
+    tags: ["2026", "Full-stack dev", "Accessibility"],
     image: "/photos/toolkit.webp",
     href: "/projects/toolkit",
   },
   {
     title: "VYNL",
-    description: "Music rating platform using a binary search algorithm to rank albums by personal preference.",
-    date: null,
-    tech: ["REACT", "POSTGRESQL", "REST API"],
+    description: "Build your personal album ranking through head-to-head picks.",
+    tags: ["2026", "Full-stack dev", "React", "PostgreSQL"],
     image: "/photos/vynl.webp",
     href: "/projects/vynl",
   },
 ]
 
-const GALLERY = [
+interface GalleryProject {
+  title: string
+  sub: string
+  img?: string
+  href?: string
+  external?: boolean
+  cursorLabel?: string
+}
+
+const GALLERY: GalleryProject[] = [
   { title: "INTERPLAY", sub: "Graphic chapbook design", img: "photos/Chapbook Mockup Inside Pages.jpg", href: "/projects/interplay" },
+    { title: "WICS WEBSITE", sub: "Website redesign for Lehigh WiCS", img: "photos/wics-website.jpg", href: "https://wics.cse.lehigh.edu/", external: true, cursorLabel: "view website" },
+  { title: "LAZY LAKE", sub: "P5.js poster", img: "photos/boat-scene.gif", href: "/projects/lazy-lake" },
+
+    { title: "INTERACTIVE RECORD PLAYER", sub: "Blender and Unity", img: "photos/recordplayerred.png", href: "/projects/record-player" },
+
   { title: "LIFE OF PI", sub: "Cover and spine redesign", img: "photos/lifeofpicovermockup.png", href: "/projects/life-of-pi" },
   { title: "PARASITE", sub: "Symbol designs", img: "photos/parasite.png", href: "/projects/parasite" },
   { title: "NOSTALGIA", sub: "P5.js poster", img: "photos/final-print.png", href: "/projects/nostalgia" },
-  { title: "LAZY LAKE", sub: "P5.js poster", img: "photos/boat-scene.gif", href: "/projects/lazy-lake" },
   { title: "CATS", sub: "P5.js poster", img: "photos/cats.gif", href: "/projects/cats" },
-  { title: "RECORD PLAYER", sub: "Blender and Unity", img: "photos/recordplayerred.png", href: "/projects/record-player" },
 ]
 
 const TECH_COLS = [
@@ -242,7 +270,7 @@ function Title({ children, color = FG }: { children: string; color?: string }) {
 
 // ─── Project cards ────────────────────────────────────────────────────────────
 
-function ProjectCard({ p, i }: { p: typeof FEATURED[0]; i: number }) {
+function ProjectCard({ p, i }: { p: FeaturedProject; i: number }) {
   const [hov, setHov] = useState(false)
   const { ref, vis } = useInView("-30px")
   return (
@@ -250,37 +278,55 @@ function ProjectCard({ p, i }: { p: typeof FEATURED[0]; i: number }) {
       className="min-w-0"
       initial={{ opacity: 0, y: 28 }} animate={vis ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}>
-      <Link to={p.href} className="group block no-underline" data-cursor="project" data-noblue="1"
-        onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-        style={{ cursor: "pointer" }}>
+      {p.external ? (
+        <a href={p.href} target="_blank" rel="noopener noreferrer" className="group block no-underline" data-cursor="project" data-cursor-label={p.cursorLabel} data-noblue="1"
+          onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={{ cursor: "pointer" }}>
+          {projectCardContent(p, i, hov)}
+        </a>
+      ) : (
+        <Link to={p.href} className="group block no-underline" data-cursor="project" data-cursor-label={p.cursorLabel} data-noblue="1"
+          onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={{ cursor: "pointer" }}>
+          {projectCardContent(p, i, hov)}
+        </Link>
+      )}
+    </motion.article>
+  )
+}
+
+function projectCardContent(p: FeaturedProject, i: number, hov: boolean) {
+  return (
+    <>
         <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden bg-[#efe7db]">
           <img src={p.image} alt={`${p.title} project`} loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
           <span className="absolute left-0 top-0 bg-accent px-3 py-2 text-xs font-bold">
-            0{i + 1} / 04
+            {String(i + 1).padStart(2, "0")} / {String(FEATURED.length).padStart(2, "0")}
           </span>
           <span className="absolute bottom-3 right-3 inline-flex size-10 items-center justify-center bg-accent text-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
             <ArrowUpRight aria-hidden="true" size={19} strokeWidth={2.5} />
           </span>
         </div>
-        <p className="mb-2 line-clamp-1 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-foreground/65">
-          {p.date || "Independent project"} · {p.tech.join(" / ")}
-        </p>
         <h3 className="mb-2 line-clamp-2 text-lg font-extrabold uppercase leading-tight transition-colors duration-200 md:text-xl"
           style={{ fontFamily: MONO, color: hov ? AC : FG }}>
           {p.title}
         </h3>
+        <div className="mb-2 flex flex-wrap gap-1.5">
+          {p.tags.map(tag => (
+            <span key={tag} className="project-meta-tag inline-flex items-center bg-transparent px-2.5 py-1 text-[0.62rem] font-bold uppercase leading-tight text-foreground">
+              {tag}
+            </span>
+          ))}
+        </div>
         <p className="line-clamp-2 text-sm leading-snug text-foreground/80">
           {p.description}
         </p>
-      </Link>
-    </motion.article>
+    </>
   )
 }
 
 // ─── Gallery ──────────────────────────────────────────────────────────────────
 
-function GalleryCard({ g }: { g: typeof GALLERY[0] }) {
+function GalleryCard({ g }: { g: GalleryProject }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [hov, setHov] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -289,29 +335,46 @@ function GalleryCard({ g }: { g: typeof GALLERY[0] }) {
     const r = ref.current?.getBoundingClientRect(); if (!r) return
     setTilt({ x: ((e.clientY - r.top) / r.height - 0.5) * -14, y: ((e.clientX - r.left) / r.width - 0.5) * 14 })
   }
-  return (
+  const card = (
     <div ref={ref} className="relative shrink-0 overflow-hidden border-2 border-foreground"
-      data-cursor="gallery" data-noblue="1"
+      data-cursor={g.href ? "gallery" : undefined} data-cursor-label={g.cursorLabel} data-noblue="1"
       style={{
         width: "clamp(220px,24vw,320px)", aspectRatio: "4/5",
         borderColor: hov ? AC : FG,
         transform: `perspective(700px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: (tilt.x === 0 && tilt.y === 0) ? "transform 0.5s ease, border-color 0.25s" : "transform 0.07s ease, border-color 0.25s",
-        cursor: "none",
+        cursor: g.href ? "none" : "default",
       }}
       onMouseMove={onMove} onMouseEnter={() => setHov(true)}
       onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHov(false) }}
-      onClick={() => navigate(g.href)}>
-      <img src={`/${g.img}`} alt={g.title} loading="lazy"
-        className="h-full w-full object-cover transition-transform duration-500"
-        style={{ transform: hov ? "scale(1.04)" : "scale(1)" }} />
-      <div className="absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300"
-        style={{ background: "linear-gradient(to top, color-mix(in srgb, var(--foreground) 92%, transparent) 0%, transparent 65%)", opacity: hov ? 1 : 0.9 }}>
+      onClick={() => { if (g.href && !g.external) navigate(g.href) }}>
+      {g.img ? (
+        <img src={`/${g.img}`} alt={g.title} loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500"
+          style={{ transform: hov ? "scale(1.04)" : "scale(1)" }} />
+      ) : (
+        <div className="absolute inset-0 flex flex-col justify-between bg-[#dce9cf] p-5 text-foreground">
+          <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em]">Lehigh University</span>
+          <div>
+            <p className="mb-1 text-[3.5rem] font-extrabold leading-none">WiCS</p>
+            <div className="mb-2 h-px w-full bg-foreground" />
+            <p className="text-xs font-semibold">Women in Computer Science</p>
+          </div>
+        </div>
+      )}
+      <div className="absolute inset-0 transition-opacity duration-300"
+        style={{ background: "linear-gradient(to top, color-mix(in srgb, var(--foreground) 92%, transparent) 0%, transparent 65%)", opacity: hov ? 1 : 0.9 }} />
+      <div className="absolute inset-0 flex flex-col justify-end p-4">
         <h4 className="mb-1 text-xl font-extrabold uppercase text-accent">{g.title}</h4>
         <p className="text-xs font-bold text-[#fffdf8]">{g.sub}</p>
       </div>
     </div>
   )
+    return g.external && g.href ? (
+      <a href={g.href} target="_blank" rel="noopener noreferrer" className="block shrink-0 no-underline">
+        {card}
+      </a>
+    ) : card
 }
 
 function Gallery() {

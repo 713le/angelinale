@@ -21,7 +21,7 @@ export default function Accessly() {
       <ProjectHero
         eyebrow="Case Study — Personal Project"
         title="ACCESSLY"
-        tagline="A design toolkit for accessible community resources and disability-inclusive information architecture."
+        tagline="Coming Soon - An accessibility auditing tool for design and engineering teams to review product experiences and identify barriers."
       />
 
       <div className="px-4 md:px-8 mb-6">
@@ -33,7 +33,7 @@ export default function Accessly() {
       <section className="px-4 md:px-8 py-16">
         <SectionHeading>Overview</SectionHeading>
         <p style={{ fontFamily: MONO, color: MUTED }} className="text-sm uppercase leading-[1.9] max-w-2xl">
-          Accessly is a project focused on making local community resources discoverable and usable by people with diverse access needs.
+          Accessly helps design and engineering teams audit the accessibility of their digital products and identify barriers to address during the design and development process.
         </p>
       </section>
 
