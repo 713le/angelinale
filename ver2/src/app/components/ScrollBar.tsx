@@ -9,7 +9,7 @@ export default function ScrollBar() {
     return () => window.removeEventListener("scroll", upd)
   }, [])
   return (
-    <div className="fixed top-0 left-0 right-0 z-[9998]" style={{ height: "2px", background: `${AC}18` }}>
+    <div className="fixed top-0 left-0 right-0 z-[9998]" style={{ height: "2px", background: "color-mix(in srgb, var(--accent) 9%, transparent)" }}>
       <div style={{ height: "100%", width: `${p * 100}%`, background: AC, transition: "width 0.1s linear" }} />
     </div>
   )

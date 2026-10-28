@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react"
 import ProjectHero from "../../components/ProjectHero"
+import NextProject from "../../components/NextProject"
 import Footer from "../../components/Footer"
-import { FG, AC, MUTED, MONO, BDRC } from "../../constants"
+import { BG, FG, AC, MUTED, MONO, BDRC } from "../../constants"
 
 const IMG = {
   cover:   '/photos/DES053 - Chapbook (final no bleed).png',
@@ -186,9 +187,9 @@ function BookViewer() {
           <div id="left-panel" className="relative overflow-hidden" style={{ flexShrink: 0 }} />
           <div id="right-panel" className="relative overflow-hidden" style={{ flexShrink: 0 }} />
           <button id="btn-prev" className="absolute top-1/2 -translate-y-1/2 flex items-center justify-center z-50 transition-opacity"
-            style={{ right: "calc(100% + 12px)", width: "36px", height: "36px", background: "#f5f3ef", border: `1px solid ${BDRC}`, color: FG, fontSize: "18px", fontFamily: MONO, cursor: "none" }}>‹</button>
+            style={{ right: "calc(100% + 12px)", width: "36px", height: "36px", background: BG, border: `2px solid ${FG}`, color: FG, fontSize: "18px", fontFamily: MONO, cursor: "none" }}>‹</button>
           <button id="btn-next" className="absolute top-1/2 -translate-y-1/2 flex items-center justify-center z-50 transition-opacity"
-            style={{ left: "calc(100% + 12px)", width: "36px", height: "36px", background: "#f5f3ef", border: `1px solid ${BDRC}`, color: FG, fontSize: "18px", fontFamily: MONO, cursor: "none" }}>›</button>
+            style={{ left: "calc(100% + 12px)", width: "36px", height: "36px", background: BG, border: `2px solid ${FG}`, color: FG, fontSize: "18px", fontFamily: MONO, cursor: "none" }}>›</button>
         </div>
         <div id="book-label" className="mt-6 text-[0.6rem] tracking-[0.15em] uppercase" style={{ fontFamily: MONO, color: MUTED }} />
       </div>
@@ -209,12 +210,13 @@ export default function Interplay() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[["Tools", "InDesign · Illustrator"], ["Type", "Graphic Chapbook"], ["Course", "Graphic Design Intro"], ["Instructor", "Maurizio Masi"]].map(([l, v]) => (
             <div key={l}>
-              <p className="text-[0.55rem] tracking-widest uppercase mb-1" style={{ fontFamily: MONO, color: AC }}>{l}</p>
+              <p className="text-[0.55rem] tracking-widest uppercase mb-1" style={{ fontFamily: MONO, color: FG }}>{l}</p>
               <p className="text-xs uppercase font-bold" style={{ fontFamily: MONO, color: FG }}>{v}</p>
             </div>
           ))}
         </div>
       </div>
+      <NextProject />
       <Footer />
     </div>
   )

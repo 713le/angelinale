@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react"
 import { useInView } from "../hooks"
 import { FG, AC, BDRC, MUTED, MONO, BG } from "../constants"
 import ProjectHero from "./ProjectHero"
+import NextProject from "./NextProject"
 import Footer from "./Footer"
 
 interface ImageItem { src: string; alt?: string }
@@ -27,7 +28,7 @@ function ImageGrid({ images, imageAspectRatio }: { images: ImageItem[]; imageAsp
         style={{ gridAutoRows: "1fr" }}
         initial={{ opacity: 0, y: 20 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
         {images.map((img, i) => (
-          <div key={i} className="overflow-hidden h-full" style={{ background: "#ddd8d0", cursor: "none", aspectRatio: imageAspectRatio && imageAspectRatio !== "auto" ? imageAspectRatio : undefined }}
+          <div key={i} className="overflow-hidden h-full border-2 border-foreground bg-[#efe7db]" style={{ cursor: "none", aspectRatio: imageAspectRatio && imageAspectRatio !== "auto" ? imageAspectRatio : undefined }}
             data-noblue="1"
             onClick={() => setLightbox(i)}>
             <img src={img.src} alt={img.alt || ""} className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
@@ -100,6 +101,7 @@ export default function GalleryPage({ eyebrow, title, tagline, images, meta, ifr
         </p>
       </div>
 
+      <NextProject />
       <Footer />
     </div>
   )

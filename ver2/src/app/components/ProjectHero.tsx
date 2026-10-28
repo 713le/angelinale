@@ -1,6 +1,7 @@
 import { motion } from "motion/react"
+import { ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router"
-import { FG, AC, MUTED, MONO } from "../constants"
+import { FG, MUTED, MONO } from "../constants"
 
 interface ProjectHeroProps {
   eyebrow: string
@@ -8,27 +9,26 @@ interface ProjectHeroProps {
   tagline: string
 }
 
-export default function ProjectHero({ eyebrow, title, tagline }: ProjectHeroProps) {
+export default function ProjectHero({ title, tagline }: ProjectHeroProps) {
   const navigate = useNavigate()
   const goBack = () => {
     navigate("/")
     setTimeout(() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), 80)
   }
   return (
-    <section className="pt-28 pb-16 px-4 md:px-8">
+    <section className="px-5 pb-12 pt-28 sm:px-8 md:px-12 md:pb-20">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-        <button onClick={goBack} className="inline-flex items-center gap-2 text-xs tracking-widest uppercase border-none bg-transparent mb-8 transition-colors p-0"
+        <button onClick={goBack} className="mb-10 inline-flex items-center gap-2 bg-transparent px-0 py-2 text-xs font-bold uppercase tracking-widest text-foreground transition-colors hover:text-foreground"
           data-noblue="1"
-          style={{ fontFamily: MONO, color: MUTED, cursor: "none" }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = AC }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = MUTED }}>
-          ← back
+          style={{ fontFamily: MONO, color: FG, cursor: "pointer" }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = FG }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = FG }}>
+          <ArrowLeft aria-hidden="true" size={14} strokeWidth={2.5} /> back
         </button>
-        <p className="text-[0.6rem] tracking-[0.2em] uppercase mb-4" style={{ fontFamily: MONO, color: AC }}>{eyebrow}</p>
-        <h1 style={{ fontFamily: MONO, fontSize: "clamp(2.2rem,7vw,5.5rem)", fontWeight: 500, color: FG, textTransform: "uppercase", letterSpacing: "-0.02em", lineHeight: 0.95, marginBottom: "1.5rem" }}>
+        <h1 style={{ fontFamily: MONO, fontSize: "clamp(2rem,6vw,5rem)", fontWeight: 800, color: FG, textTransform: "uppercase", letterSpacing: "0", lineHeight: 0.92, marginBottom: "1.5rem", maxWidth: "18ch" }}>
           {title}
         </h1>
-        <p className="max-w-2xl text-sm uppercase leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>
+        <p className="max-w-2xl text-base leading-relaxed md:text-xl" style={{ fontFamily: MONO, color: MUTED }}>
           {tagline}
         </p>
       </motion.div>

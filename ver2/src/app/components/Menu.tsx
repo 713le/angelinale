@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react"
 import { useNavigate } from "react-router"
-import { BG, FG, AC, MUTED, MONO } from "../constants"
+import { BG, FG, MUTED, MONO } from "../constants"
 
 export default function Menu({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ export default function Menu({ open, onClose }: { open: boolean; onClose: () => 
             <motion.button key={label} onClick={() => go(path, anchor)}
               className="text-left bg-transparent border-none uppercase leading-none w-fit transition-colors"
               style={{ fontSize: "clamp(2.2rem,6vw,5rem)", color: FG, cursor: "none", fontFamily: MONO }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = AC }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = FG }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = FG }}
               initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25, delay: i * 0.07 }}>

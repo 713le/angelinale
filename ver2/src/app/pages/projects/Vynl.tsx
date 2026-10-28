@@ -1,8 +1,10 @@
 import { motion } from "motion/react"
+import { ArrowUpRight } from "lucide-react"
 import { useInView } from "../../hooks"
 import { FG, AC, BDRC, MUTED, MONO, BG } from "../../constants"
 import ProjectHero from "../../components/ProjectHero"
 import CaseStudyNav from "../../components/CaseStudyNav"
+import NextProject from "../../components/NextProject"
 import Footer from "../../components/Footer"
 
 const NAV_SECTIONS = [
@@ -13,13 +15,12 @@ const NAV_SECTIONS = [
   { id: "reflection", label: "Reflection" },
 ]
 
-function Section({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+function Section({ id, children }: { id: string; label: string; children: React.ReactNode }) {
   const { ref, vis } = useInView("-40px")
   return (
     <motion.section id={id} ref={ref as React.RefObject<HTMLElement>}
       className="px-4 md:px-8 py-20 border-t" style={{ borderColor: BDRC }}
       initial={{ opacity: 0, y: 24 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
-      <p className="text-[0.58rem] tracking-[0.2em] uppercase mb-8" style={{ fontFamily: MONO, color: AC }}>{label}</p>
       {children}
     </motion.section>
   )
@@ -34,13 +35,13 @@ function Body({ children }: { children: React.ReactNode }) {
 }
 
 function Tag({ children }: { children: string }) {
-  return <span className="text-[0.58rem] px-3 py-1.5 uppercase tracking-widest" style={{ fontFamily: MONO, border: `1px solid ${AC}40`, color: AC }}>{children}</span>
+  return <span className="text-[0.58rem] px-3 py-1.5 uppercase tracking-widest" style={{ fontFamily: MONO, border: "1px solid color-mix(in srgb, var(--accent) 25%, transparent)", color: FG }}>{children}</span>
 }
 
 function IterationCard({ num, label, problem, fix }: { num: string; label: string; problem: string; fix: string }) {
   return (
     <div className="p-6 border" style={{ borderColor: BDRC }}>
-      <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>{num}</p>
+      <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{num}</p>
       <h4 className="text-xs font-bold uppercase mb-4" style={{ fontFamily: MONO, color: FG }}>{label}</h4>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -48,7 +49,7 @@ function IterationCard({ num, label, problem, fix }: { num: string; label: strin
           <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: FG }}>{problem}</p>
         </div>
         <div>
-          <p className="text-[0.58rem] tracking-widest uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>What changed</p>
+          <p className="text-[0.58rem] tracking-widest uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>What changed</p>
           <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: FG }}>{fix}</p>
         </div>
       </div>
@@ -75,7 +76,7 @@ export default function Vynl() {
             { label: "Status", value: "Shipped ✓" },
           ].map(({ label, value }) => (
             <div key={label}>
-              <p className="text-[0.55rem] tracking-[0.18em] uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>{label}</p>
+              <p className="text-[0.55rem] tracking-[0.18em] uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>{label}</p>
               <p className="text-xs uppercase font-bold" style={{ fontFamily: MONO, color: FG }}>{value}</p>
             </div>
           ))}
@@ -83,17 +84,17 @@ export default function Vynl() {
         <div className="pt-6">
           <a href="https://vynl-music.vercel.app/" target="_blank" rel="noopener noreferrer" data-noblue="1"
             className="inline-flex items-center gap-3 px-5 py-3 text-xs tracking-widest uppercase no-underline font-bold transition-opacity"
-            style={{ fontFamily: MONO, background: AC, color: BG, cursor: "none" }}
+            style={{ fontFamily: MONO, background: AC, color: FG, cursor: "none" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.8" }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1" }}>
-            view live site ↗
+            view live site <ArrowUpRight aria-hidden="true" size={14} strokeWidth={2.5} />
           </a>
         </div>
       </div>
 
       {/* Hero image */}
-      <div className="px-4 md:px-8 mb-4">
-        <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+      <div className="mb-4 px-5 sm:px-8 md:px-12">
+        <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
           <img src="/photos/vynl.webp" alt="VYNL music platform" className="w-full h-auto" />
         </div>
       </div>
@@ -105,8 +106,8 @@ export default function Vynl() {
             <Body>
               I use Letterboxd obsessively for films. It gives you a clean, permanent record of everything you&apos;ve watched and how you feel about it. Music has nothing like that. Spotify has listening history; Rate Your Music has a community — but neither solves the core problem: how do you actually figure out where an album ranks in your all-time list without spending an hour second-guessing yourself?
             </Body>
-            <div className="mt-6 p-5 border-l-2" style={{ borderColor: AC, background: `${AC}06` }}>
-              <p className="text-xs font-bold uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>How might we...</p>
+            <div className="mt-6 p-5 border-l-2" style={{ borderColor: AC, background: "color-mix(in srgb, var(--accent) 2%, transparent)" }}>
+              <p className="text-xs font-bold uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>How might we...</p>
               <p className="text-sm uppercase" style={{ fontFamily: MONO, color: FG }}>Rank something as subjective as music with minimal comparisons and without decision fatigue?</p>
             </div>
           </div>
@@ -136,8 +137,8 @@ export default function Vynl() {
             </div>
           ))}
         </div>
-        <div className="mt-12 p-8 border-l-2" style={{ borderColor: AC, background: `${AC}04` }}>
-          <p className="text-[0.6rem] tracking-widest uppercase mb-3" style={{ fontFamily: MONO, color: AC }}>Algorithm decision</p>
+        <div className="mt-12 p-8 border-l-2" style={{ borderColor: AC, background: "color-mix(in srgb, var(--accent) 1%, transparent)" }}>
+          <p className="text-[0.6rem] tracking-widest uppercase mb-3" style={{ fontFamily: MONO, color: FG }}>Algorithm decision</p>
           <p className="text-sm uppercase leading-relaxed max-w-2xl" style={{ fontFamily: MONO, color: FG }}>
             I evaluated insertion sort (O(n) comparisons), bubble sort, and binary search. Binary search wins decisively for ranking lists — O(log n) comparisons to place any new item. For 100 albums, that&apos;s at most 7 comparisons per new addition instead of potentially 99.
           </p>
@@ -176,7 +177,7 @@ export default function Vynl() {
             { img: "/photos/search-results.png", title: "Album search via iTunes API", desc: "Search any album in the iTunes catalog — metadata, artwork, and tracklist pulled automatically." },
           ].map(({ img, title, desc }) => (
             <div key={title}>
-              <div className="w-full overflow-hidden mb-3" style={{ background: "#ddd8d0" }}>
+              <div className="mb-3 w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
                 <img src={img} alt={title} className="w-full h-auto" />
               </div>
               <p className="text-[0.6rem] tracking-widest uppercase" style={{ fontFamily: MONO, color: MUTED }}>{title} — {desc}</p>
@@ -195,7 +196,7 @@ export default function Vynl() {
             { img: "/photos/vynl-profile.png", title: "Social Features", desc: "Follow other users, see their rankings, and compare taste. Combined social feed shows recent ratings from everyone you follow." },
           ].map(({ img, title, desc }) => (
             <div key={title} className="flex flex-col gap-4">
-              <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+              <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
                 <img src={img} alt={title} className="w-full h-auto" />
               </div>
               <div>
@@ -224,7 +225,7 @@ export default function Vynl() {
               {["Algorithm Design", "React State", "PostgreSQL", "REST APIs", "Serverless Deploy", "UX Testing", "Social UI Patterns"].map(t => <Tag key={t}>{t}</Tag>)}
             </div>
             <div className="mt-6 p-5 border" style={{ borderColor: BDRC }}>
-              <p className="text-[0.58rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>What&apos;s next</p>
+              <p className="text-[0.58rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>What&apos;s next</p>
               <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>
                 AI-generated playlist creation from your top-ranked albums. Better onboarding — a &ldquo;seed with popular albums&rdquo; flow so new users have a ranked list immediately.
               </p>
@@ -233,6 +234,7 @@ export default function Vynl() {
         </div>
       </Section>
 
+      <NextProject />
       <Footer />
       <CaseStudyNav sections={NAV_SECTIONS} />
     </div>

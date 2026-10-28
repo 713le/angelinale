@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react"
 import { motion } from "motion/react"
+import { Circle } from "lucide-react"
 import { AC, BG, MONO } from "../constants"
 
-type CursorMode = "default" | "link" | "project" | "gallery"
+type CursorMode = "default" | "text" | "link" | "project" | "gallery" | "doodle"
 
 export default function Cursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
@@ -11,8 +12,8 @@ export default function Cursor() {
   const raf = useRef<number | null>(null)
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState<CursorMode>("default")
+  const [doodleTool, setDoodleTool] = useState<"pen" | "eraser">("pen")
   const [showCursor, setShowCursor] = useState(false)
-  const lastLink = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -21,49 +22,61 @@ export default function Cursor() {
     const updatePointerSupport = () => setShowCursor(media.matches)
     updatePointerSupport()
 
-    const onMove = (e: MouseEvent) => { mouse.current = { x: e.clientX, y: e.clientY }; setShow(true) }
+    const onMove = (e: PointerEvent) => {
+      mouse.current = { x: e.clientX, y: e.clientY }
+      if (document.documentElement.dataset.doodle === "true") {
+        setMode("doodle")
+        lagged.current = { ...mouse.current }
+        if (cursorRef.current) cursorRef.current.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`
+      }
+      setShow(true)
+    }
     const onOver = (e: MouseEvent) => {
       const el = e.target as HTMLElement
-      if (lastLink.current) { lastLink.current.style.color = ""; lastLink.current = null }
       const proj = el.closest("[data-cursor='project']")
       const gallery = el.closest("[data-cursor='gallery']")
       const link = el.closest("a,button")
-      if (proj) { setMode("project") }
+      const text = el.closest("p,h1,h2,h3,h4,h5,h6,li,blockquote,figcaption,dt,dd")
+      if (document.documentElement.dataset.doodle === "true") { setMode("doodle") }
+      else if (proj) { setMode("project") }
       else if (gallery) { setMode("gallery") }
-      else if (link) {
-        setMode("link")
-        const linkEl = link as HTMLElement
-        if (!linkEl.dataset.noblue) { linkEl.style.color = AC; lastLink.current = linkEl }
-      } else { setMode("default") }
+      else if (link) { setMode("link") }
+      else if (text) { setMode("text") }
+      else { setMode("default") }
     }
-    const onOut = (e: MouseEvent) => {
-      const el = e.target as HTMLElement
-      const link = el.closest("a,button") as HTMLElement | null
-      if (link && lastLink.current === link) { link.style.color = ""; lastLink.current = null }
+    const syncDoodleTool = () => {
+      setDoodleTool(document.documentElement.dataset.doodleTool === "eraser" ? "eraser" : "pen")
     }
     const tick = () => {
-      lagged.current.x += (mouse.current.x - lagged.current.x) * 0.13
-      lagged.current.y += (mouse.current.y - lagged.current.y) * 0.13
+      if (document.documentElement.dataset.doodle === "true") {
+        lagged.current = { ...mouse.current }
+      } else {
+        lagged.current.x += (mouse.current.x - lagged.current.x) * 0.13
+        lagged.current.y += (mouse.current.y - lagged.current.y) * 0.13
+      }
       if (cursorRef.current) cursorRef.current.style.transform = `translate3d(${lagged.current.x}px,${lagged.current.y}px,0)`
       raf.current = window.requestAnimationFrame(tick)
     }
     media.addEventListener("change", updatePointerSupport)
-    document.addEventListener("mousemove", onMove)
+    document.addEventListener("pointermove", onMove)
     document.addEventListener("mouseover", onOver)
-    document.addEventListener("mouseout", onOut)
     document.addEventListener("mouseleave", () => setShow(false))
+    window.addEventListener("doodletoolchange", syncDoodleTool)
     raf.current = window.requestAnimationFrame(tick)
     return () => {
       media.removeEventListener("change", updatePointerSupport)
-      document.removeEventListener("mousemove", onMove)
+      document.removeEventListener("pointermove", onMove)
       document.removeEventListener("mouseover", onOver)
-      document.removeEventListener("mouseout", onOut)
+      window.removeEventListener("doodletoolchange", syncDoodleTool)
       if (raf.current !== null) cancelAnimationFrame(raf.current)
     }
   }, [])
 
   const isPill = mode === "project" || mode === "gallery"
   const isLink = mode === "link"
+  const isText = mode === "text"
+  const isDoodle = mode === "doodle"
+  const isDoodleEraser = isDoodle && doodleTool === "eraser"
   const pillLabel = mode === "gallery" ? "view overview" : "view case study"
 
   if (!showCursor) return null
@@ -81,10 +94,14 @@ export default function Cursor() {
         </motion.div>
       ) : (
         <div style={{
-          transform: "translate(-50%,-50%)", width: isLink ? "36px" : "10px", height: isLink ? "36px" : "10px",
-          borderRadius: "50%", background: isLink ? `${AC}28` : AC, border: isLink ? `1.5px solid ${AC}` : "none",
-          transition: "width 0.22s ease, height 0.22s ease, background 0.22s ease",
-        }} />
+          transform: "translate(-50%,-50%)", width: isDoodle ? "var(--doodle-cursor-size, 7px)" : isText ? "3px" : isLink ? "36px" : "10px", height: isDoodle ? "var(--doodle-cursor-size, 7px)" : isText ? "28px" : isLink ? "36px" : "10px",
+          borderRadius: isText ? "2px" : "50%", background: isDoodleEraser ? "transparent" : isDoodle ? "var(--doodle-cursor-color, var(--accent))" : isLink ? "color-mix(in srgb, var(--accent) 16%, transparent)" : AC,
+          opacity: isDoodle ? "var(--doodle-cursor-opacity, 0.85)" : 1,
+          border: isLink && !isDoodle ? `1.5px solid ${AC}` : "none",
+          transition: "width 0.22s ease, height 0.22s ease, border-radius 0.22s ease, background 0.22s ease, opacity 0.22s ease",
+        }}>
+          {isDoodleEraser && <Circle aria-hidden="true" className="h-full w-full" color={AC} strokeWidth={2} />}
+        </div>
       )}
     </div>
   )

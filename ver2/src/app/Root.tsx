@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { Outlet, useLocation } from "react-router"
 import { AnimatePresence, motion } from "motion/react"
-import ScrollBar from "./components/ScrollBar"
 import Cursor from "./components/Cursor"
 import Nav from "./components/Nav"
 import Menu from "./components/Menu"
@@ -23,7 +22,6 @@ export default function Root() {
     <>
       <style>{`@media (pointer: fine) { * { cursor: none !important; } } ::-webkit-scrollbar { display: none; } * { scrollbar-width: none; }`}</style>
       <div style={{ background: BG, color: FG, fontFamily: MONO, overflowX: "hidden", minHeight: "100vh" }}>
-        <ScrollBar />
         <Cursor />
         <AnimatePresence>
           {loading && <Terminal key="t" onDone={handleDone} />}

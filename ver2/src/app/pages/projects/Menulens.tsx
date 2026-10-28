@@ -3,6 +3,7 @@ import { useInView } from "../../hooks"
 import { FG, AC, BDRC, MUTED, MONO, BG } from "../../constants"
 import ProjectHero from "../../components/ProjectHero"
 import CaseStudyNav from "../../components/CaseStudyNav"
+import NextProject from "../../components/NextProject"
 import Footer from "../../components/Footer"
 
 // Use root `/photos/` to match the site's other image strategy
@@ -26,13 +27,12 @@ const NAV_SECTIONS = [
   { id: "reflection", label: "Reflection" },
 ]
 
-function Section({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+function Section({ id, children }: { id: string; label: string; children: React.ReactNode }) {
   const { ref, vis } = useInView("-40px")
   return (
     <motion.section id={id} ref={ref as React.RefObject<HTMLElement>}
       className="px-4 md:px-8 py-20 border-t" style={{ borderColor: BDRC }}
       initial={{ opacity: 0, y: 24 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
-      <p className="text-[0.58rem] tracking-[0.2em] uppercase mb-8" style={{ fontFamily: MONO, color: AC }}>{label}</p>
       {children}
     </motion.section>
   )
@@ -47,14 +47,14 @@ function Body({ children }: { children: React.ReactNode }) {
 }
 
 function Tag({ children }: { children: string }) {
-  return <span className="text-[0.58rem] px-3 py-1.5 uppercase tracking-widest" style={{ fontFamily: MONO, border: `1px solid ${AC}40`, color: AC }}>{children}</span>
+  return <span className="text-[0.58rem] px-3 py-1.5 uppercase tracking-widest" style={{ fontFamily: MONO, border: "1px solid color-mix(in srgb, var(--accent) 25%, transparent)", color: FG }}>{children}</span>
 }
 
 function Quote({ text, attr }: { text: string; attr: string }) {
   return (
     <div className="py-6 pl-6 my-6" style={{ borderLeft: `3px solid ${AC}` }}>
       <p className="text-sm uppercase italic mb-2" style={{ fontFamily: MONO, color: FG }}>&ldquo;{text}&rdquo;</p>
-      <p className="text-[0.6rem] tracking-widest uppercase" style={{ fontFamily: MONO, color: `${AC}99` }}>— {attr}</p>
+      <p className="text-[0.6rem] tracking-widest uppercase" style={{ fontFamily: MONO, color: FG }}>— {attr}</p>
     </div>
   )
 }
@@ -62,7 +62,7 @@ function Quote({ text, attr }: { text: string; attr: string }) {
 function IterationCard({ num, label, problem, fix }: { num: string; label: string; problem: string; fix: string }) {
   return (
     <div className="p-6 border" style={{ borderColor: BDRC }}>
-      <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>{num}</p>
+      <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{num}</p>
       <h4 className="text-xs font-bold uppercase mb-4" style={{ fontFamily: MONO, color: FG }}>{label}</h4>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -70,7 +70,7 @@ function IterationCard({ num, label, problem, fix }: { num: string; label: strin
           <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: FG }}>{problem}</p>
         </div>
         <div>
-          <p className="text-[0.58rem] tracking-widest uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>What I changed</p>
+          <p className="text-[0.58rem] tracking-widest uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>What I changed</p>
           <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: FG }}>{fix}</p>
         </div>
       </div>
@@ -81,7 +81,7 @@ function IterationCard({ num, label, problem, fix }: { num: string; label: strin
 function StatCard({ stat, label }: { stat: string; label: string }) {
   return (
     <div className="p-6 border text-center" style={{ borderColor: BDRC }}>
-      <p style={{ fontFamily: MONO, fontSize: "clamp(1.7rem,4vw,2.4rem)", fontWeight: 600, color: AC, letterSpacing: "-0.02em" }}>{stat}</p>
+      <p style={{ fontFamily: MONO, fontSize: "clamp(1.7rem,4vw,2.4rem)", fontWeight: 600, color: FG, letterSpacing: "-0.02em" }}>{stat}</p>
       <p className="text-[0.58rem] tracking-widest uppercase mt-2 leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>{label}</p>
     </div>
   )
@@ -104,7 +104,7 @@ function ComparisonTable() {
           <tr style={{ borderBottom: `1px solid ${BDRC}` }}>
             <th style={{ width: "58%", padding: "1rem", textAlign: "left" }} />
             <th style={{ width: "21%", padding: "1rem", textAlign: "center" }}>
-              <p className="text-[0.58rem] tracking-widest uppercase font-bold" style={{ fontFamily: MONO, color: AC }}>MenuLens</p>
+              <p className="text-[0.58rem] tracking-widest uppercase font-bold" style={{ fontFamily: MONO, color: FG }}>MenuLens</p>
             </th>
             <th style={{ width: "21%", padding: "1rem", textAlign: "center" }}>
               <p className="text-[0.58rem] tracking-widest uppercase" style={{ fontFamily: MONO, color: MUTED }}>Existing apps</p>
@@ -119,7 +119,7 @@ function ComparisonTable() {
                 <p className="text-xs uppercase" style={{ fontFamily: MONO, color: FG }}>{r.feature}</p>
               </td>
               <td style={{ padding: "1rem", textAlign: "center" }}>
-                <span style={{ color: AC, fontFamily: MONO, fontSize: "0.85rem" }}>✓</span>
+                <span style={{ color: FG, fontFamily: MONO, fontSize: "0.85rem" }}>✓</span>
               </td>
               <td style={{ padding: "1rem", textAlign: "center" }}>
                 <span style={{ color: MUTED, fontFamily: MONO, fontSize: "0.65rem" }} className="uppercase tracking-widest">
@@ -143,7 +143,7 @@ function ComparisonTable() {
 function MediaBlock({ src, alt, caption }: { src: string; alt: string; caption: string }) {
   return (
     <div className="mt-8">
-      <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+      <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
         <img src={src} alt={alt} className="w-full h-auto" />
       </div>
       <p className="text-[0.6rem] tracking-widest uppercase mt-2" style={{ fontFamily: MONO, color: MUTED }}>{caption}</p>
@@ -169,7 +169,7 @@ export default function MenuLens() {
             { label: "Timeline", value: "August 2026" },
           ].map(({ label, value }) => (
             <div key={label}>
-              <p className="text-[0.55rem] tracking-[0.18em] uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>{label}</p>
+              <p className="text-[0.55rem] tracking-[0.18em] uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>{label}</p>
               <p className="text-xs uppercase font-bold" style={{ fontFamily: MONO, color: FG }}>{value}</p>
             </div>
           ))}
@@ -178,7 +178,7 @@ export default function MenuLens() {
 
       {/* Hero image — replace with your key mockup/hero shot */}
       <div className="px-4 md:px-8 mb-4">
-        <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+        <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
           <img src={IMG.menulensMockup2} alt="MenuLens app" className="w-full h-auto" />
         </div>
       </div>
@@ -193,8 +193,8 @@ export default function MenuLens() {
             <Body>
               <br />But this isn&apos;t only a language problem. I&apos;m a fluent English speaker, and I still find myself googling dishes mid-meal, searching one unfamiliar name at a time on a menu of thirty items.
             </Body>
-            <div className="mt-6 p-5 border-l-2" style={{ borderColor: AC, background: `${AC}06` }}>
-              <p className="text-xs font-bold uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>How might we...</p>
+            <div className="mt-6 p-5 border-l-2" style={{ borderColor: AC, background: "color-mix(in srgb, var(--accent) 2%, transparent)" }}>
+              <p className="text-xs font-bold uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>How might we...</p>
               <p className="text-sm uppercase" style={{ fontFamily: MONO, color: FG }}>Turn any menu into something you can actually picture, without pulling out a second app for every dish?</p>
             </div>
           </div>
@@ -236,7 +236,7 @@ export default function MenuLens() {
               { n: "03", t: "Dietary needs reset every visit", d: "People with allergies or restrictions re-scan and re-check the same information on every single visit, with no memory carried over." },
             ].map(({ n, t, d }) => (
               <div key={n} className="p-5 border" style={{ borderColor: BDRC }}>
-                <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>{n}</p>
+                <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{n}</p>
                 <p className="text-xs font-bold uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{t}</p>
                 <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>{d}</p>
               </div>
@@ -309,7 +309,7 @@ export default function MenuLens() {
               <div>
                 <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>{desc}</p>
               </div>
-              <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+              <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
                 <img src={img} alt={title} className="w-full h-auto" />
               </div>
               
@@ -350,6 +350,7 @@ export default function MenuLens() {
         </div>
       </Section>
 
+      <NextProject />
       <Footer />
       <CaseStudyNav sections={NAV_SECTIONS} />
     </div>

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Star } from "lucide-react"
 import { Link, useNavigate } from "react-router"
-import { useGlitch, useTypewriter, useInView } from "../hooks"
+import { useInView } from "../hooks"
 import { BG, FG, AC, BDRC, MUTED, MONO } from "../constants"
 import Footer from "../components/Footer"
 
@@ -141,7 +142,15 @@ const FEATURED = [
     href: "/projects/menulens",
   },
   {
-    title: "TOOLKIT FOR DISABILITY WELLBEING IN BETHLEHM",
+    title: "ACCESSLY",
+    description: "Accessible resources hub",
+    date: "Jun 2026",
+    tech: ["FIGMA", "REACT"],
+    image: "/photos/accessly-mockup.webp",
+    href: "/projects/accessly",
+  },
+  {
+    title: "TOOLKIT FOR DISABILITY WELLBEING IN BETHLEHEM",
     description: "Senior Capstone — Accessibility-first web hub with disability resources and community stories in Bethlehem, PA.",
     date: "Jan 2026 — present",
     tech: ["REACT", "NODE.JS", "SANITY"],
@@ -159,13 +168,13 @@ const FEATURED = [
 ]
 
 const GALLERY = [
-  { title: "INTERPLAY", sub: "GRAPHIC CHAPBOOK DESIGN", img: "photos/Chapbook Mockup Inside Pages.jpg", href: "/projects/interplay" },
-  { title: "LIFE OF PI", sub: "COVER AND SPINE REDESIGN", img: "photos/lifeofpicovermockup.png", href: "/projects/life-of-pi" },
-  { title: "PARASITE", sub: "SYMBOL DESIGNS", img: "photos/parasite.png", href: "/projects/parasite" },
-  { title: "NOSTALGIA", sub: "P5.JS POSTER", img: "photos/final-print.png", href: "/projects/nostalgia" },
-  { title: "LAZY LAKE", sub: "P5.JS POSTER", img: "photos/boat-scene.gif", href: "/projects/lazy-lake" },
-  { title: "CATS", sub: "P5.JS POSTER", img: "photos/cats.gif", href: "/projects/cats" },
-  { title: "RECORD PLAYER", sub: "BLENDER & UNITY", img: "photos/recordplayerred.png", href: "/projects/record-player" },
+  { title: "INTERPLAY", sub: "Graphic chapbook design", img: "photos/Chapbook Mockup Inside Pages.jpg", href: "/projects/interplay" },
+  { title: "LIFE OF PI", sub: "Cover and spine redesign", img: "photos/lifeofpicovermockup.png", href: "/projects/life-of-pi" },
+  { title: "PARASITE", sub: "Symbol designs", img: "photos/parasite.png", href: "/projects/parasite" },
+  { title: "NOSTALGIA", sub: "P5.js poster", img: "photos/final-print.png", href: "/projects/nostalgia" },
+  { title: "LAZY LAKE", sub: "P5.js poster", img: "photos/boat-scene.gif", href: "/projects/lazy-lake" },
+  { title: "CATS", sub: "P5.js poster", img: "photos/cats.gif", href: "/projects/cats" },
+  { title: "RECORD PLAYER", sub: "Blender and Unity", img: "photos/recordplayerred.png", href: "/projects/record-player" },
 ]
 
 const TECH_COLS = [
@@ -176,132 +185,57 @@ const TECH_COLS = [
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 function Hero() {
-  const navigate = useNavigate()
-  const { txt: heroTxt, go: heroGlitch } = useGlitch("ANGELINA LE")
-  const sub1 = useTypewriter("is design-minded & code-fluent.", 46, 600)
-  // const sub2 = useTypewriter("design-minded. code-fluent.", 52, 3800)
-  const [spot, setSpot] = useState({ x: 50, y: 50 })
-  const [parallax, setParallax] = useState({ x: 0, y: 0 })
-  const [inHero, setInHero] = useState(false)
-  const [overLink, setOverLink] = useState(false)
-  const labelRef = useRef<HTMLDivElement>(null)
-
-  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const r = e.currentTarget.getBoundingClientRect()
-    const px = (e.clientX - r.left) / r.width
-    const py = (e.clientY - r.top) / r.height
-    setSpot({ x: px * 100, y: py * 100 })
-    setParallax({ x: (px - 0.5) * -18, y: (py - 0.5) * -12 })
-    const isLink = !!(e.target as HTMLElement).closest("a,button")
-    setOverLink(isLink)
-    if (labelRef.current) labelRef.current.style.transform = `translate3d(${e.clientX + 14}px,${e.clientY + 14}px,0)`
-  }
-
-  const onClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest("a,button")) return
-    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })
-  }
-
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-start justify-between gap-6 px-4 pt-20 pb-10 overflow-hidden sm:px-6 md:flex-row md:items-center md:gap-8 md:pt-24 md:pb-12"
-      style={{ cursor: "none" }}
-      onMouseMove={onMouseMove} onMouseEnter={() => setInHero(true)}
-      onMouseLeave={() => { setInHero(false); setOverLink(false) }} onClick={onClick}>
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: `radial-gradient(450px circle at ${spot.x}% ${spot.y}%, rgba(0,82,254,0.05) 0%, transparent 70%)`,
-      }} />
-
-      <div ref={labelRef} className="fixed z-[9997] pointer-events-none top-0 left-0"
-        style={{ opacity: inHero && !overLink ? 1 : 0, transition: "opacity 0.15s",
-          fontFamily: MONO, fontSize: "0.65rem", color: AC,
-          padding: "0.28rem 0.55rem", letterSpacing: "0.12em",
-          textTransform: "uppercase", whiteSpace: "nowrap" }}>
-        [ view work ]
-      </div>
-
-      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center gap-6 md:hidden">
-        <motion.div className="w-full max-w-[560px]"
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-          <img src="/photos/ascii-art.webp" alt="ASCII art" className="w-full h-auto object-contain" />
+    <section id="home" className="relative flex min-h-[86svh] flex-col justify-end gap-8 overflow-hidden px-5 pb-7 pt-24 sm:px-8 md:px-12 md:pb-10">
+      <div className="grid items-end gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+        <motion.div className="relative z-10 order-2 lg:order-1"
+          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
+          <h1 className="mb-4 whitespace-nowrap text-[2.3rem] font-extrabold uppercase leading-[0.84] min-[360px]:text-[2.55rem] sm:text-[4rem] lg:text-[4.5rem] xl:text-[5.7rem] 2xl:text-[7rem]"
+            style={{ fontFamily: MONO, color: FG }}>
+            Angelina Le
+          </h1>
+          <p className="max-w-xl text-lg leading-relaxed md:text-xl">
+            Design-minded and code-fluent. I turn complex ideas into clear, accessible digital experiences.
+          </p>
+          <button onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
+            className="mt-7 inline-flex min-h-12 min-w-0 items-center gap-4 border-2 border-foreground bg-accent px-5 text-sm font-bold uppercase tracking-wide text-foreground transition-transform hover:-translate-y-1 hover:text-foreground"
+            style={{ cursor: "pointer" }}>
+            Selected work <ArrowDown aria-hidden="true" size={17} />
+          </button>
         </motion.div>
 
-        <motion.div className="w-full max-w-[580px] flex flex-col items-start text-left"
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}>
-          <div style={{ overflow: "hidden", marginBottom: "0.7rem" }}>
-            <motion.h1 onMouseEnter={heroGlitch}
-              initial={{ y: "105%" }} animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-              style={{ fontFamily: MONO, fontSize: "clamp(1.5rem, 8vw, 4.8rem)", fontWeight: 500, lineHeight: 0.9, letterSpacing: "-0.03em", color: FG, textTransform: "uppercase", cursor: "none", whiteSpace: "normal", maxWidth: "100%" }}>
-              {heroTxt}
-            </motion.h1>
+        <motion.figure className="relative order-1 m-0 lg:order-2"
+          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.18 }}>
+          <div className="overflow-hidden border-2 border-foreground bg-[#efe7db]">
+            <img src="/photos/hero-bunnies.png" alt="3 green hand-drawn bunny doodles"
+              className="aspect-[16/10] w-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]" />
           </div>
-          <motion.p className="text-base sm:text-xl tracking-wide uppercase"
-            style={{ fontFamily: MONO, color: FG, lineHeight: 1.2, whiteSpace: "normal", fontSize: "clamp(0.88rem, 3.2vw, 1.5rem)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-            {sub1}
-            <span style={{ color: AC, opacity: sub1.length < "is design-minded & code-fluent.".length ? 1 : 0 }}>█</span>
-          </motion.p>
-        </motion.div>
+          <figcaption className="mt-3 flex items-start justify-between gap-4 border-t border-foreground pt-2 text-xs uppercase">
+            {/* <span>Design at the intersection of people and technology</span> */}
+            {/* <span className="shrink-0 font-bold">01 / 04</span> */}
+          </figcaption>
+          <span className="absolute -right-2 -top-3 bg-accent px-3 py-1 text-[0.65rem] font-bold uppercase tracking-widest md:-right-4 md:top-5">
+            Portfolio 2026
+          </span>
+        </motion.figure>
       </div>
-
-      <motion.div className="relative z-10 hidden md:flex md:flex-none max-w-[580px] order-2 md:order-none md:flex-1 flex-col items-start"
-        initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
-        <div style={{ overflow: "hidden", marginBottom: "0.6rem" }}>
-          <motion.h1 onMouseEnter={heroGlitch}
-            initial={{ y: "105%" }} animate={{ y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-            style={{ fontFamily: MONO, fontSize: "clamp(1.5rem, 8vw, 4.8rem)", fontWeight: 500, lineHeight: 0.95, letterSpacing: "-0.03em", color: FG, textTransform: "uppercase", cursor: "none", whiteSpace: "normal", maxWidth: "100%" }}>
-            {heroTxt}
-          </motion.h1>
-        </div>
-        <motion.p className="text-base sm:text-xl md:text-3xl tracking-wide uppercase"
-          style={{ fontFamily: MONO, color: FG, lineHeight: 1.2, whiteSpace: "normal", fontSize: "clamp(0.88rem, 3.2vw, 1.5rem)", marginTop: 0, display: "block" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-          {sub1}
-          <span style={{ color: AC, opacity: sub1.length < "is design-minded & code-fluent.".length ? 1 : 0 }}>█</span>
-        </motion.p>
-        {/* <motion.p className="text-sm tracking-wide uppercase"
-          style={{ fontFamily: MONO, color: "rgba(15,14,13,0.32)" }} initial={{ opacity: 0 }} animate={{ opacity: sub2.length > 0 ? 1 : 0 }}>
-          {sub2}
-          <span style={{ color: AC, opacity: sub2.length > 0 && sub2.length < "design-minded. code-fluent.".length ? 1 : 0 }}>█</span>
-        </motion.p> */}
-        {/* <motion.div className="flex items-center flex-wrap gap-4 mt-8"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>
-          <span style={{ fontFamily: MONO, fontSize: "1.1rem", color: FG }}>✮ ⋆ ˚｡𖦹 ⋆｡°✩</span>
-          <a href="mailto:angelinale13@gmail.com" data-noblue="1"
-            className="inline-flex items-center gap-2 px-5 py-3 text-xs tracking-widest uppercase no-underline transition-all duration-300"
-            style={{ fontFamily: MONO, border: `1.5px solid ${AC}`, color: AC, background: "transparent", cursor: "none" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = AC; (e.currentTarget as HTMLAnchorElement).style.color = BG }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = AC }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
-              <rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-            </svg>
-            say hi
-          </a>
-        </motion.div> */}
-      </motion.div>
-
-      <motion.div className="relative z-10 hidden md:flex md:flex-none w-full order-1 md:order-none md:w-auto md:ml-auto md:justify-end"
-        style={{ maxWidth: "100%", transform: `translate(${parallax.x}px, ${parallax.y}px)`, transition: "transform 0.35s ease-out" }}
-        initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}>
-        <div className="w-full max-w-full overflow-visible md:w-auto md:flex md:justify-end">
-          <div className="w-full md:w-auto">
-            <AsciiArt />
-          </div>
-        </div>
-      </motion.div>
+      <div className="flex items-center justify-between border-t-2 border-foreground pt-3 text-xs font-bold uppercase tracking-[0.12em]">
+        <span>Lehigh University · PA</span>
+        <span className="hidden sm:inline">Scroll for selected work ↓</span>
+      </div>
     </section>
   )
 }
 
 // ─── Section title ────────────────────────────────────────────────────────────
 
-function Title({ children }: { children: string }) {
-  const { txt, go } = useGlitch(children)
+function Title({ children, color = FG }: { children: string; color?: string }) {
   const { ref, vis } = useInView()
   return (
-    <motion.h2 ref={ref as React.RefObject<HTMLHeadingElement>} onMouseEnter={go}
+    <motion.h2 ref={ref as React.RefObject<HTMLHeadingElement>}
       initial={{ opacity: 0, y: 20 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
-      style={{ fontFamily: MONO, fontSize: "clamp(2rem,5vw,3.2rem)", fontWeight: 500, color: FG, cursor: "none", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: "3rem", lineHeight: 1 }}>
-      {txt}
+      style={{ fontFamily: MONO, fontSize: "clamp(3rem,8vw,7rem)", fontWeight: 800, color, cursor: "none", textTransform: "uppercase", letterSpacing: "0", marginBottom: "0", lineHeight: 0.88 }}>
+      {children}
     </motion.h2>
   )
 }
@@ -311,34 +245,36 @@ function Title({ children }: { children: string }) {
 function ProjectCard({ p, i }: { p: typeof FEATURED[0]; i: number }) {
   const [hov, setHov] = useState(false)
   const { ref, vis } = useInView("-30px")
-  const navigate = useNavigate()
   return (
-    <motion.div ref={ref as React.RefObject<HTMLDivElement>}
+    <motion.article ref={ref as React.RefObject<HTMLElement>}
+      className="min-w-0"
       initial={{ opacity: 0, y: 28 }} animate={vis ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}>
-      <div className="block no-underline" data-cursor="project" data-noblue="1"
+      <Link to={p.href} className="group block no-underline" data-cursor="project" data-noblue="1"
         onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-        onClick={() => navigate(p.href)}
-        style={{ cursor: "none" }}>
-        <div className="w-full overflow-hidden mb-4" style={{ aspectRatio: "4/3", background: "#ddd8d0" }}>
-          <div className="w-full h-full bg-cover bg-center transition-transform duration-700"
-            style={{ backgroundImage: `url('${p.image}')`, transform: hov ? "scale(1.04)" : "scale(1)" }} />
+        style={{ cursor: "pointer" }}>
+        <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden bg-[#efe7db]">
+          <img src={p.image} alt={`${p.title} project`} loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+          <span className="absolute left-0 top-0 bg-accent px-3 py-2 text-xs font-bold">
+            0{i + 1} / 04
+          </span>
+          <span className="absolute bottom-3 right-3 inline-flex size-10 items-center justify-center bg-accent text-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+            <ArrowUpRight aria-hidden="true" size={19} strokeWidth={2.5} />
+          </span>
         </div>
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="font-bold leading-tight mb-1 transition-colors duration-200"
-              style={{ fontFamily: MONO, fontSize: "0.82rem", textTransform: "uppercase", color: hov ? AC : FG }}>
-              {p.title}
-            </h3>
-            <p style={{ fontFamily: MONO, fontSize: "0.62rem", color: MUTED, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-              {p.tech.join(" · ")}{p.date ? ` — ${p.date}` : ""}
-            </p>
-          </div>
-          <span className="shrink-0 transition-colors duration-200 mt-0.5"
-            style={{ fontFamily: MONO, fontSize: "0.65rem", textTransform: "uppercase", color: hov ? AC : MUTED }}>↗</span>
-        </div>
-      </div>
-    </motion.div>
+        <p className="mb-2 line-clamp-1 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-foreground/65">
+          {p.date || "Independent project"} · {p.tech.join(" / ")}
+        </p>
+        <h3 className="mb-2 line-clamp-2 text-lg font-extrabold uppercase leading-tight transition-colors duration-200 md:text-xl"
+          style={{ fontFamily: MONO, color: hov ? AC : FG }}>
+          {p.title}
+        </h3>
+        <p className="line-clamp-2 text-sm leading-snug text-foreground/80">
+          {p.description}
+        </p>
+      </Link>
+    </motion.article>
   )
 }
 
@@ -354,11 +290,11 @@ function GalleryCard({ g }: { g: typeof GALLERY[0] }) {
     setTilt({ x: ((e.clientY - r.top) / r.height - 0.5) * -14, y: ((e.clientX - r.left) / r.width - 0.5) * 14 })
   }
   return (
-    <div ref={ref} className="shrink-0 overflow-hidden relative"
+    <div ref={ref} className="relative shrink-0 overflow-hidden border-2 border-foreground"
       data-cursor="gallery" data-noblue="1"
       style={{
-        width: "clamp(190px,20vw,260px)", aspectRatio: "3/4",
-        border: `1px solid ${hov ? AC : BDRC}`,
+        width: "clamp(220px,24vw,320px)", aspectRatio: "4/5",
+        borderColor: hov ? AC : FG,
         transform: `perspective(700px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: (tilt.x === 0 && tilt.y === 0) ? "transform 0.5s ease, border-color 0.25s" : "transform 0.07s ease, border-color 0.25s",
         cursor: "none",
@@ -366,12 +302,13 @@ function GalleryCard({ g }: { g: typeof GALLERY[0] }) {
       onMouseMove={onMove} onMouseEnter={() => setHov(true)}
       onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHov(false) }}
       onClick={() => navigate(g.href)}>
-      <div className="w-full h-full bg-cover bg-center transition-transform duration-500"
-        style={{ backgroundImage: `url('${g.img}')`, backgroundColor: "#d8d4cd", transform: hov ? "scale(1.07)" : "scale(1)" }} />
+      <img src={`/${g.img}`} alt={g.title} loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-500"
+        style={{ transform: hov ? "scale(1.04)" : "scale(1)" }} />
       <div className="absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300"
-        style={{ background: "linear-gradient(to top, rgba(15,14,13,0.85) 0%, transparent 55%)", opacity: hov ? 1 : 0.5 }}>
-        <h4 style={{ fontFamily: MONO, fontSize: "0.68rem", fontWeight: 700, color: BG, textTransform: "uppercase", marginBottom: "0.2rem" }}>{g.title}</h4>
-        <p style={{ fontFamily: MONO, fontSize: "0.56rem", color: "rgba(245,243,239,0.55)", textTransform: "uppercase" }}>{g.sub}</p>
+        style={{ background: "linear-gradient(to top, color-mix(in srgb, var(--foreground) 92%, transparent) 0%, transparent 65%)", opacity: hov ? 1 : 0.9 }}>
+        <h4 className="mb-1 text-xl font-extrabold uppercase text-accent">{g.title}</h4>
+        <p className="text-xs font-bold text-[#fffdf8]">{g.sub}</p>
       </div>
     </div>
   )
@@ -387,17 +324,24 @@ function Gallery() {
   const onMove = (e: React.MouseEvent) => { if (!dragging.current || !scrollRef.current) return; scrollRef.current.scrollLeft = scrollLeft.current - (e.pageX - startX.current) * 1.4 }
   const onUp = () => { dragging.current = false; setIsDrag(false) }
   return (
-    <div className="mt-14 pt-10 border-t" style={{ borderColor: BDRC }}>
-      <div className="flex items-center justify-between mb-5">
-        <p style={{ fontFamily: MONO, fontSize: "0.8rem", letterSpacing: "0.12em", color: MUTED, textTransform: "uppercase" }}>Fun!</p>
+    <div className="mt-20 border-t-2 pt-8" style={{ borderColor: FG }}>
+      <div className="mb-7 flex items-end justify-between gap-4">
+        <div>
+          {/* <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-foreground/60">Side projects / experiments</p> */}
+          <h3 className="text-3xl font-extrabold uppercase md:text-5xl">Play</h3>
+        </div>
         <div className="flex gap-2">
-          {["←", "→"].map((a, ai) => (
-            <button key={a} onClick={() => scrollRef.current?.scrollBy({ left: ai === 0 ? -280 : 280, behavior: "smooth" })}
-              className="text-xs px-3 py-1.5 uppercase tracking-widest transition-all"
-              style={{ fontFamily: MONO, border: `1px solid ${BDRC}`, color: MUTED, background: "transparent", cursor: "none" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = AC; (e.currentTarget as HTMLButtonElement).style.color = AC }}
+          {[
+            { Icon: ArrowLeft, label: "Scroll gallery left", distance: -280 },
+            { Icon: ArrowRight, label: "Scroll gallery right", distance: 280 },
+          ].map(({ Icon, label, distance }) => (
+            <button key={label} aria-label={label} title={label}
+              onClick={() => scrollRef.current?.scrollBy({ left: distance, behavior: "smooth" })}
+              className="inline-flex size-11 items-center justify-center border-2 border-foreground bg-transparent text-foreground transition-colors hover:bg-accent hover:text-foreground"
+              style={{ cursor: "pointer" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = AC; (e.currentTarget as HTMLButtonElement).style.color = FG }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = BDRC; (e.currentTarget as HTMLButtonElement).style.color = MUTED }}>
-              {a}
+              <Icon aria-hidden="true" size={16} strokeWidth={2.5} />
             </button>
           ))}
         </div>
@@ -413,9 +357,12 @@ function Gallery() {
 
 function Projects() {
   return (
-    <section id="work" className="px-6 py-24 border-t" style={{ borderColor: BDRC }}>
-      <Title>/ projects</Title>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
+    <section id="work" className="border-t-2 px-5 py-20 sm:px-8 md:px-12 md:py-28" style={{ borderColor: FG }}>
+      <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end md:mb-20">
+        <Title>Selected work</Title>
+        <p className="max-w-xs text-sm font-bold uppercase leading-relaxed text-foreground/65">Product thinking, visual systems, and experiments built around real people.</p>
+      </div>
+      <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:gap-y-16">
         {FEATURED.map((p, i) => <ProjectCard key={p.title} p={p} i={i} />)}
       </div>
       <Gallery />
@@ -428,36 +375,45 @@ function Projects() {
 function About() {
   const { ref, vis } = useInView()
   return (
-    <section id="about" className="px-6 py-24 border-t" style={{ borderColor: BDRC }}>
-      <Title>/ about me</Title>
-      <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
+    <section id="about" className="border-t-2 px-5 py-20 text-background sm:px-8 md:px-12 md:py-28" style={{ borderColor: FG, background: FG, color: BG }}>
+      <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end md:mb-20">
+        <Title color={BG}>In brief</Title>
+        <p className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: "color-mix(in srgb, var(--background) 100%, transparent)" }}>About Me</p>
+      </div>
+      <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-1 items-start gap-10 md:grid-cols-[1fr_0.9fr] md:gap-16">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
-          <p className="text-sm uppercase mb-6 leading-[1.9]" style={{ fontFamily: MONO, color: "rgba(15,14,13,0.72)" }}>
+          <p className="mb-8 text-lg leading-[1.65] md:text-2xl" style={{ fontFamily: MONO, color: BG }}>
             I am currently a senior at Lehigh University, pursuing a Bachelor of Science in Computer Science with a minor in Graphic Design. I&apos;ve interned as a UX Designer and Researcher at{" "}
-            <span style={{ color: AC }}>DT House</span> and a UX Designer and Web Developer at{" "}
-            <span style={{ color: AC }}>AINA Technologies</span>.{" "}
+            <span className="bg-accent px-1 text-foreground"><CompanyLink href="https://www.dt-house.com/">DT House</CompanyLink></span> and a UX Designer and Web Developer at{" "}
+            <span className="bg-accent px-1 text-foreground"><CompanyLink href="https://ainatechnologies.com/">AINA Technologies</CompanyLink></span>. I also volunteer as a Designer with{" "}
+            <span className="bg-accent px-1 text-foreground">The Bebop Workshop Institute</span> alongside{" "}
+            <span className="bg-accent px-1 text-foreground"><CompanyLink href="https://www.developforgood.org/">Develop for Good</CompanyLink></span>, and work as a Digital Media Research Assistant with{" "}
+            <span className="bg-accent px-1 text-foreground"><CompanyLink href="https://www.futureghost.art/">Future Ghost Digital Media Research Lab</CompanyLink></span>.{" "}
             I&apos;m a design-minded developer passionate about creating intuitive experiences that blend aesthetics with accessibility.
           </p>
-          <p className="text-[0.6rem] tracking-widest uppercase mb-3" style={{ fontFamily: MONO, color: MUTED }}>technologies</p>
-          <div className="grid grid-cols-2 gap-x-8 mb-7">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em]">Tools</p>
+          <div className="mb-8 grid grid-cols-2 gap-x-8">
             {TECH_COLS.map((col, ci) => (
-              <ul key={ci} className="list-none p-0 m-0">
+              <ul key={ci} className="m-0 list-none p-0">
                 {col.map(s => (
-                  <li key={s} className="text-xs py-2 uppercase border-b relative pl-3" style={{ fontFamily: MONO, borderColor: BDRC, color: "rgba(15,14,13,0.65)" }}>
-                    <span style={{ color: AC, marginRight: "0.4rem" }}>→</span>{s}
+                  <li key={s} className="flex items-center gap-2 py-2 text-sm" style={{ color: BG }}>
+                    <Star aria-hidden="true" size={12} strokeWidth={2} fill={AC} color={AC} />
+                    {s}
                   </li>
                 ))}
               </ul>
             ))}
           </div>
-          <p className="text-sm uppercase leading-[1.9]" style={{ fontFamily: MONO, color: MUTED }}>
-            In my free time, I love exploring new design tools, making my way through all the national parks, and playing way too much Roblox with my friends!
+          <p className="max-w-xl text-base leading-[1.7] text-background/80 md:text-lg">
+            In my free time, I love exploring new design tools, making my way through all the national parks, and playing (way too much) Roblox with my friends!
           </p>
         </motion.div>
-        <motion.div className="relative" initial={{ opacity: 0, x: 20 }} animate={vis ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.55, delay: 0.12 }}>
-          <div className="w-full bg-cover bg-center" style={{ aspectRatio: "16/9", maxHeight: "6000px", backgroundImage: "url('photos/about-me.jpg')", backgroundColor: "#d8d4cd" }} />
-          <div className="absolute pointer-events-none" style={{ inset: 0, top: "10px", left: "10px", border: `1px solid ${AC}30`, zIndex: -1 }} />
-        </motion.div>
+        <motion.figure className="relative m-0" initial={{ opacity: 0, x: 20 }} animate={vis ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.55, delay: 0.12 }}>
+          <div className="overflow-hidden border-2 border-foreground bg-[#efe7db]">
+            <img src="/photos/about-me.jpg" alt="AI.NA Technologies campaign in Times Square" loading="lazy" className="aspect-[4/5] w-full object-cover md:aspect-[5/6]" />
+          </div>
+          <figcaption className="mt-3 border-t-2 border-foreground pt-2 text-xs font-bold uppercase tracking-wide">New York, NY / <span className="bg-accent px-1 text-foreground"><CompanyLink href="https://ainatechnologies.com/">AINA Technologies</CompanyLink></span></figcaption>
+        </motion.figure>
       </div>
     </section>
   )
@@ -467,6 +423,10 @@ function About() {
 
 interface Entry { title: string; period: string; bullets: string[] }
 
+function CompanyLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return <a href={href} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline hover:opacity-80">{children}</a>
+}
+
 function AccordionItem({ e, idx }: { e: Entry; idx: number }) {
   const [open, setOpen] = useState(false)
   const { ref, vis } = useInView("-30px")
@@ -475,13 +435,14 @@ function AccordionItem({ e, idx }: { e: Entry; idx: number }) {
       initial={{ opacity: 0, x: -16 }} animate={vis ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.4, delay: idx * 0.07 }}
       className="border-b" style={{ borderColor: BDRC }}>
-      <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-4 py-5 text-left bg-transparent border-none group" style={{ cursor: "none" }}>
-        <span className="text-[0.58rem] tracking-widest shrink-0 mt-0.5 w-6" style={{ fontFamily: MONO, color: AC }}>{String(idx + 1).padStart(2, "0")}</span>
+      <button onClick={() => setOpen(!open)} aria-expanded={open} aria-label={`${open ? "Collapse" : "Expand"} experience details ${idx + 1}`}
+        className="group flex w-full items-start gap-4 border-none bg-transparent py-5 text-left" style={{ cursor: "none" }}>
+        <span className="text-[0.58rem] tracking-widest shrink-0 mt-0.5 w-6" style={{ fontFamily: MONO, color: "color-mix(in srgb, var(--foreground) 72%, transparent)" }}>{String(idx + 1).padStart(2, "0")}</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-bold uppercase transition-colors leading-snug" style={{ fontFamily: MONO, color: open ? AC : FG }}>{e.title}</p>
           <p className="text-xs mt-1 uppercase" style={{ fontFamily: MONO, color: MUTED }}>{e.period}</p>
         </div>
-        <motion.span animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.2 }} className="text-xl shrink-0 mt-0.5" style={{ color: AC, fontFamily: MONO }}>+</motion.span>
+        <motion.span animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.2 }} className="text-xl shrink-0 mt-0.5" style={{ color: "color-mix(in srgb, var(--foreground) 72%, transparent)", fontFamily: MONO }}>+</motion.span>
       </button>
       <AnimatePresence>
         {open && (
@@ -503,6 +464,20 @@ function AccordionItem({ e, idx }: { e: Entry; idx: number }) {
 
 function Experience() {
   const professional: Entry[] = [
+    {
+      title: "Designer – The Bebop Workshop Institute w/ Develop for Good",
+      period: "October 2026 – present",
+      bullets: [
+        "Designing a site with a mission page, donation integration, bursary application form, education video portal, and event calendar for a nonprofit offering free jazz education to youth and low-income musicians, as part of a volunteer team.",
+      ],
+    },
+    {
+      title: "Digital Media Research Assistant – Future Ghost Digital Media Research Lab",
+      period: "October 2026 – present",
+      bullets: [
+        "Contributing to design and development projects and supporting long-form health equity research for a performance and emerging-technology collective.",
+      ],
+    },
     {
       title: "UX/UI Design and Research Intern @ DT House",
       period: "Singapore · June 2025 – August 2025",
@@ -541,22 +516,21 @@ function Experience() {
     },
   ]
   return (
-    <section id="resume" className="px-6 py-24 border-t" style={{ borderColor: BDRC }}>
-      <Title>/ experience</Title>
-      <div className="max-w-3xl">
-        <p className="text-[0.58rem] tracking-widest uppercase mb-4" style={{ fontFamily: MONO, color: `${AC}99` }}>Professional</p>
-        {professional.map((e, i) => <AccordionItem key={e.title} e={e} idx={i} />)}
-        <p className="text-[0.58rem] tracking-widest uppercase mt-10 mb-4" style={{ fontFamily: MONO, color: `${AC}99` }}>Leadership</p>
-        {leadership.map((e, i) => <AccordionItem key={e.title} e={e} idx={i + professional.length} />)}
-        <div className="mt-10">
-          <a href="resume.pdf" target="_blank" rel="noopener noreferrer" data-noblue="1"
-            className="inline-flex items-center gap-3 px-6 py-4 text-xs tracking-widest uppercase no-underline font-bold transition-opacity"
-            style={{ fontFamily: MONO, background: AC, color: BG, cursor: "none" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.8" }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1" }}>
-            [ view full resume ]
-            {/* <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3.5 h-3.5"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg> */}
-          </a>
+    <section id="resume" className="border-t-2 px-5 py-20 sm:px-8 md:px-12 md:py-28" style={{ borderColor: FG }}>
+      <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end md:mb-16">
+        <Title>Experience</Title>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-3 border-2 border-foreground bg-accent px-5 py-3 text-sm font-bold uppercase text-foreground transition-transform hover:-translate-y-1 hover:text-foreground">
+          Full résumé <ArrowUpRight size={18} aria-hidden="true" />
+        </a>
+      </div>
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
+        <div>
+          <p className="mb-4 border-b-2 border-foreground pb-3 text-sm font-bold uppercase tracking-[0.12em]">Professional</p>
+          {professional.map((e, i) => <AccordionItem key={i} e={e} idx={i} />)}
+        </div>
+        <div>
+          <p className="mb-4 border-b-2 border-foreground pb-3 text-sm font-bold uppercase tracking-[0.12em]">Leadership</p>
+          {leadership.map((e, i) => <AccordionItem key={i} e={e} idx={i + professional.length} />)}
         </div>
       </div>
     </section>
@@ -572,6 +546,7 @@ export default function Home() {
       <Projects />
       <About />
       <Experience />
+      <img src="/photos/lehigh.jpg" alt="Aerial view of Lehigh University" loading="lazy" className="block h-auto w-full" />
       <Footer />
     </>
   )

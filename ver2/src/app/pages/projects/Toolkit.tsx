@@ -1,8 +1,10 @@
 import { motion } from "motion/react"
+import { ArrowUpRight } from "lucide-react"
 import { useInView } from "../../hooks"
 import { FG, AC, BDRC, MUTED, MONO, BG } from "../../constants"
 import ProjectHero from "../../components/ProjectHero"
 import CaseStudyNav from "../../components/CaseStudyNav"
+import NextProject from "../../components/NextProject"
 import Footer from "../../components/Footer"
 
 const NAV_SECTIONS = [
@@ -13,13 +15,12 @@ const NAV_SECTIONS = [
   { id: "reflection", label: "Reflection" },
 ]
 
-function Section({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+function Section({ id, children }: { id: string; label: string; children: React.ReactNode }) {
   const { ref, vis } = useInView("-40px")
   return (
     <motion.section id={id} ref={ref as React.RefObject<HTMLElement>}
       className="px-4 md:px-8 py-20 border-t" style={{ borderColor: BDRC }}
       initial={{ opacity: 0, y: 24 }} animate={vis ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
-      <p className="text-[0.58rem] tracking-[0.2em] uppercase mb-8" style={{ fontFamily: MONO, color: AC }}>{label}</p>
       {children}
     </motion.section>
   )
@@ -34,14 +35,14 @@ function Body({ children }: { children: React.ReactNode }) {
 }
 
 function Tag({ children }: { children: string }) {
-  return <span className="text-[0.58rem] px-3 py-1.5 uppercase tracking-widest" style={{ fontFamily: MONO, border: `1px solid ${AC}40`, color: AC }}>{children}</span>
+  return <span className="text-[0.58rem] px-3 py-1.5 uppercase tracking-widest" style={{ fontFamily: MONO, border: "1px solid color-mix(in srgb, var(--accent) 25%, transparent)", color: FG }}>{children}</span>
 }
 
 function Quote({ text, attr }: { text: string; attr: string }) {
   return (
     <div className="py-6 pl-6 my-6" style={{ borderLeft: `3px solid ${AC}` }}>
       <p className="text-sm uppercase italic mb-2" style={{ fontFamily: MONO, color: FG }}>&ldquo;{text}&rdquo;</p>
-      <p className="text-[0.6rem] tracking-widest uppercase" style={{ fontFamily: MONO, color: `${AC}99` }}>— {attr}</p>
+      <p className="text-[0.6rem] tracking-widest uppercase" style={{ fontFamily: MONO, color: FG }}>— {attr}</p>
     </div>
   )
 }
@@ -49,7 +50,7 @@ function Quote({ text, attr }: { text: string; attr: string }) {
 function IterationCard({ num, label, problem, fix }: { num: string; label: string; problem: string; fix: string }) {
   return (
     <div className="p-6 border" style={{ borderColor: BDRC }}>
-      <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>{num}</p>
+      <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{num}</p>
       <h4 className="text-xs font-bold uppercase mb-4" style={{ fontFamily: MONO, color: FG }}>{label}</h4>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -57,7 +58,7 @@ function IterationCard({ num, label, problem, fix }: { num: string; label: strin
           <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: FG }}>{problem}</p>
         </div>
         <div>
-          <p className="text-[0.58rem] tracking-widest uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>What we changed</p>
+          <p className="text-[0.58rem] tracking-widest uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>What we changed</p>
           <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: FG }}>{fix}</p>
         </div>
       </div>
@@ -84,7 +85,7 @@ export default function Toolkit() {
             { label: "Team", value: "2 Developers + Prof. Kowalski" },
           ].map(({ label, value }) => (
             <div key={label}>
-              <p className="text-[0.55rem] tracking-[0.18em] uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>{label}</p>
+              <p className="text-[0.55rem] tracking-[0.18em] uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>{label}</p>
               <p className="text-xs uppercase font-bold" style={{ fontFamily: MONO, color: FG }}>{value}</p>
             </div>
           ))}
@@ -92,17 +93,17 @@ export default function Toolkit() {
         <div className="pt-6">
           <a href="https://www.inclusivebethlehem.org/" target="_blank" rel="noopener noreferrer" data-noblue="1"
             className="inline-flex items-center gap-3 px-5 py-3 text-xs tracking-widest uppercase no-underline font-bold transition-opacity"
-            style={{ fontFamily: MONO, background: AC, color: BG, cursor: "none" }}
+            style={{ fontFamily: MONO, background: AC, color: FG, cursor: "none" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.8" }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1" }}>
-            view live site ↗
+            view live site <ArrowUpRight aria-hidden="true" size={14} strokeWidth={2.5} />
           </a>
         </div>
       </div>
 
       {/* Hero image */}
-      <div className="px-4 md:px-8 mb-4">
-        <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+      <div className="mb-4 px-5 sm:px-8 md:px-12">
+        <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
           <img src="/photos/toolkit.webp" alt="Toolkit for Disability Wellbeing" className="w-full h-auto" />
         </div>
       </div>
@@ -114,8 +115,8 @@ export default function Toolkit() {
             <Body>
               Professor Jenny Kowalski of Lehigh&apos;s Design Department spent years talking to disabled residents of Bethlehem, PA — understanding what daily life really looks like with a disability in a mid-sized city. Her work produced a series of physical toolkit booklets. But physical booklets don&apos;t search. They don&apos;t update. They don&apos;t translate.
             </Body>
-            <div className="mt-6 p-5 border-l-2" style={{ borderColor: AC, background: `${AC}06` }}>
-              <p className="text-xs font-bold uppercase mb-1.5" style={{ fontFamily: MONO, color: AC }}>How might we...</p>
+            <div className="mt-6 p-5 border-l-2" style={{ borderColor: AC, background: "color-mix(in srgb, var(--accent) 2%, transparent)" }}>
+              <p className="text-xs font-bold uppercase mb-1.5" style={{ fontFamily: MONO, color: FG }}>How might we...</p>
               <p className="text-sm uppercase" style={{ fontFamily: MONO, color: FG }}>Make disability resources as easy to find as googling a restaurant — and keep them accurate without a dev team?</p>
             </div>
           </div>
@@ -142,7 +143,7 @@ export default function Toolkit() {
           <Quote text="How am I going to pay a copayment of $28 when I can hardly pay my bills?" attr="Bethlehem resident" />
         </div>
         <div className="mt-10">
-          <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+          <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
             <img src="/photos/mapping.png" alt="Community mapping workshop output" className="w-full h-auto" />
           </div>
           <p className="text-[0.6rem] tracking-widest uppercase mt-2" style={{ fontFamily: MONO, color: MUTED }}>Community mapping workshop — Bethlehem, PA</p>
@@ -157,7 +158,7 @@ export default function Toolkit() {
               { n: "03", t: "No feedback loop", d: "There was no way for residents to report inaccessible barriers or share experiences with one another." },
             ].map(({ n, t, d }) => (
               <div key={n} className="p-5 border" style={{ borderColor: BDRC }}>
-                <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>{n}</p>
+                <p className="text-[0.55rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{n}</p>
                 <p className="text-xs font-bold uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>{t}</p>
                 <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>{d}</p>
               </div>
@@ -191,8 +192,8 @@ export default function Toolkit() {
             fix="Fixed focus management, added proper ARIA roles and labels, corrected all contrast ratios. Added an on-site accessibility toolbar for font size, contrast, and link underlining."
           />
         </div>
-        <div className="mt-14 p-8 border-l-2" style={{ borderColor: AC, background: `${AC}04` }}>
-          <p className="text-[0.6rem] tracking-widest uppercase mb-3" style={{ fontFamily: MONO, color: AC }}>Key learning from iteration</p>
+        <div className="mt-14 p-8 border-l-2" style={{ borderColor: AC, background: "color-mix(in srgb, var(--accent) 1%, transparent)" }}>
+          <p className="text-[0.6rem] tracking-widest uppercase mb-3" style={{ fontFamily: MONO, color: FG }}>Key learning from iteration</p>
           <p className="text-sm uppercase leading-relaxed max-w-xl" style={{ fontFamily: MONO, color: FG }}>
             We initially assumed accessibility was a feature to add at the end. User testing proved it&apos;s a constraint that shapes every decision from the beginning — it improved the experience for everyone, not just users with disabilities.
           </p>
@@ -211,7 +212,7 @@ export default function Toolkit() {
             { img: "/photos/barrier-reporting.png", title: "Barrier Reporting", desc: "Multiple pathways to report barriers — pin a specific location on the map, or submit a general report for inaccessible websites or policy gaps." },
           ].map(({ img, title, desc }) => (
             <div key={title} className="flex flex-col gap-4">
-              <div className="w-full overflow-hidden" style={{ background: "#ddd8d0" }}>
+              <div className="w-full overflow-hidden border-2 border-foreground bg-[#efe7db]">
                 <img src={img} alt={title} className="w-full h-auto" />
               </div>
               <div>
@@ -240,7 +241,7 @@ export default function Toolkit() {
               {["WCAG Compliance", "Keyboard Navigation", "ARIA", "CMS Integration", "Bilingual UX", "Community-Centered Design", "ArcGIS API", "Semantic Search", "NLP"].map(t => <Tag key={t}>{t}</Tag>)}
             </div>
             <div className="mt-6 p-5 border" style={{ borderColor: BDRC }}>
-              <p className="text-[0.58rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: AC }}>What&apos;s next</p>
+              <p className="text-[0.58rem] tracking-widest uppercase mb-2" style={{ fontFamily: MONO, color: FG }}>What&apos;s next</p>
               <p className="text-xs uppercase leading-relaxed" style={{ fontFamily: MONO, color: MUTED }}>
                 This summer: user testing with real community members, followed by targeted improvements to the mobile experience and overall navigation usability.
               </p>
@@ -249,6 +250,7 @@ export default function Toolkit() {
         </div>
       </Section>
 
+      <NextProject />
       <Footer />
       <CaseStudyNav sections={NAV_SECTIONS} />
     </div>

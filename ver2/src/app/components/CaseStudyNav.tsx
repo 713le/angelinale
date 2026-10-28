@@ -22,9 +22,9 @@ export default function CaseStudyNav({ sections }: { sections: { id: string; lab
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const mutedColor = `rgba(15,14,13,0.35)`
+  const mutedColor = "rgba(255,253,248,0.72)"
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-[900]" style={{ background: BG, borderTop: `1px solid ${BDRC}` }}>
+    <nav className="fixed bottom-0 left-0 right-0 z-[900]" style={{ background: FG }}>
       <div className="flex items-center justify-center gap-1 overflow-x-auto px-4 py-2.5" style={{ scrollbarWidth: "none" }}>
         <button onClick={() => scrollTo("top")}
           className="text-[0.55rem] tracking-[0.15em] uppercase px-3 py-1.5 bg-transparent border-none whitespace-nowrap transition-colors"
